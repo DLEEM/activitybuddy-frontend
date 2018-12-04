@@ -4,8 +4,8 @@ import './App.css';
 
 import Home from './pages/Home';
 import About from './pages/About';
-import ActivityIndex from './pages/ActivityIndex';
-import ShowActivities from './pages/ShowActivities';
+import ActivityIndex from './pages/Activities/List';
+import ShowActivities from './pages/Activities/ShowActivity';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
