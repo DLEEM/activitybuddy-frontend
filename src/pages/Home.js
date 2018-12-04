@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Carousel } from 'react-bootstrap';
-import '../App.css';
 
 class Home extends Component {
   render() {
