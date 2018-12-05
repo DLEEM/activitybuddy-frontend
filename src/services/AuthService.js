@@ -2,7 +2,7 @@ import decode from 'jwt-decode'
 
 export default class AuthService {
 	constructor(domain) {
-		this.domain = 'http://localhost:3000'
+		this.domain = 'http://localhost:3001'
 	}
 
 	login = (credentials) => {
@@ -22,11 +22,13 @@ export default class AuthService {
 	}
 
 	register = (user) => {
+		console.log('HEREEEEEEEEEE - AuthService user', user)
 		return this.authFetch(`${this.domain}/users`, {
 			method: "POST",
 			body: JSON.stringify(user),
 		})
 		.then(statusResponse => {
+			console.log(statusResponse);
 			let token = statusResponse.headers.get('Authorization')
 			// set a JWT token in local storage, taken out of response from API
 			console.log(token);
@@ -88,7 +90,8 @@ export default class AuthService {
 		if (this.loggedIn()) {
 			headers['Authorization'] = 'Bearer ' + this.getToken()
 		}
-
+		console.log('CHECK OUT THE HEADER', headers)
+		console.log('CHECK OUT THE OPTIONS', options)
 		return fetch(url, {
 			headers,
 			...options
