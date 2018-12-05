@@ -19,10 +19,10 @@ class Header extends Component {
           </NavItem>
         </Nav>
         <Nav className="pull-right">
-          <NavItem eventKey={3} href="#">
+          <NavItem eventKey={3} href="/login">
             Login
           </NavItem>
-          <NavItem eventKey={4} href="#">
+          <NavItem eventKey={4} href="/register">
             Register
           </NavItem>
         </Nav>
