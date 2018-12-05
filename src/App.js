@@ -7,8 +7,8 @@ import About from './pages/About';
 import List from './pages/Activities/List';
 import ShowActivity from './pages/Activities/ShowActivity';
 
-import Header from './components/Header';
-import Footer from './components/Footer';
+import Header from './sharedComponents/Header';
+import Footer from './sharedComponents/Footer';
 
 class App extends Component {
   render() {
