@@ -1,8 +1,8 @@
-const BASE = 'http://localhost:3000'
+const BASE = 'http://localhost:3001'
 
 let getActivities = function() {
   return fetch(BASE + '/activities')
-    .then((resp) => {
+    .then(resp => {
       let json = resp.json()
       return json
     })
@@ -10,7 +10,7 @@ let getActivities = function() {
 
 let getActivity = function(id) {
   return fetch(BASE + `/activities/${id}`)
-    .then((resp) => {
+    .then(resp => {
       let json = resp.json()
       return json
     })
@@ -18,7 +18,7 @@ let getActivity = function(id) {
 
 let getUserActivities = function(user_id) {
   return fetch(BASE + `/users/${user_id}/activities`)
-    .then((resp) => {
+    .then(resp => {
         let json = resp.json()
         return json
       })

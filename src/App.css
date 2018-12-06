@@ -34,3 +34,16 @@
 .carousel img {
   margin: 0 auto;
 }
+
+.card-container {
+  margin: 0 auto;
+  width: 85vw;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.individual-card {
+  border: 1px solid black;
+  width: 200px;
+  margin: 5px 10px;
+}
