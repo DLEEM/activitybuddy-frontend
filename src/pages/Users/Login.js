@@ -17,6 +17,7 @@ class Login extends Component {
     }
   }
   render() {
+    let { email, password } = this.state.form 
       return (
           <div>
             <div className="loginMain" >
@@ -24,12 +25,14 @@ class Login extends Component {
               <input
                 type="email"
                 name="email"
+                value={email}
                 placeholder="Enter Email Here"
                 onChange={this.onChange}
               />
               <input
                 type="password"
                 name="password"
+                value={password}
                 placeholder="Enter Password Here"
                 onChange={this.onChange}
               />
