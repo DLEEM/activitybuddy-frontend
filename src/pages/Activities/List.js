@@ -23,7 +23,7 @@ class ActivityIndex extends Component {
                   <CardBody>
                     <CardTitle>{activity.name}</CardTitle>
                     <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-                    <Button>Button</Button>
+                    <Button href={`/activities/${activity.id}`}>Button</Button>
                   </CardBody>
                 </Card>
               </div>

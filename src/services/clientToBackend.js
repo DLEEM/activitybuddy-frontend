@@ -1,4 +1,4 @@
-const BASE = 'http://localhost:3001'
+const BASE = "http://localhost:3001"
 
 let getActivities = function() {
   return fetch(BASE + '/activities')
@@ -11,6 +11,7 @@ let getActivities = function() {
 let getActivity = function(id) {
   return fetch(BASE + `/activities/${id}`)
     .then(resp => {
+      console.log(resp)
       let json = resp.json()
       return json
     })
