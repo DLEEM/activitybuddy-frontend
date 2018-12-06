@@ -5,11 +5,11 @@ export default class AuthService {
 		this.domain = 'http://localhost:3001'
 	}
 
-	login = (credentials) => {
-		console.log(credentials)
+	login = (user) => {
+		console.log(user)
 		return this.authFetch(`${this.domain}/users/sign_in`, {
 			method: "POST",
-			body: JSON.stringify(credentials),
+			body: JSON.stringify(user),
 		})
 		.then(statusResponse => {
 			let token = statusResponse.headers.get('Authorization')
@@ -17,6 +17,7 @@ export default class AuthService {
 			console.log(token);
 			this.setToken(token)
 			//return json from response
+			console.log(statusResponse);
 			return statusResponse.json()
 		})
 	}
@@ -61,6 +62,7 @@ export default class AuthService {
 	// The token is stored in the browser
 	setToken(token) {
 		console.log(token);
+
 		let parsedToken = token.split('.')[1]
 		localStorage.setItem('id_token', parsedToken)
 	}

@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import AuthService from '../services/AuthService';
 
 class Header extends Component {
+  constructor(props) {
+    super(props)
+
+    this.auth = new AuthService()
+  }
   render() {
     return (
       <Navbar>
@@ -18,16 +24,34 @@ class Header extends Component {
             See All Activities
           </NavItem>
         </Nav>
-        <Nav className="pull-right">
+
+        {this.determineButton()}
+
+      </Navbar>
+    );
+  }
+
+  determineButton = () => {
+    if(!this.auth.loggedIn()) {
+      return(
+        <Nav pullRight>
           <NavItem eventKey={3} href="/login">
-            Login
+            Log-In
           </NavItem>
           <NavItem eventKey={4} href="/register">
             Register
           </NavItem>
         </Nav>
-      </Navbar>
-    );
+      )
+    } else {
+      return (
+        <Nav pullRight>
+          <NavItem eventKey={3} href="/" onClick={this.auth.logout}>
+            Log-Out
+          </NavItem>
+        </Nav>
+      )
+    }
   }
 }
 

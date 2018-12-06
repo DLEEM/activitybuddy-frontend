@@ -17,7 +17,6 @@ class Login extends Component {
     }
   }
   render() {
-    let { email, password } = this.state.form.user
       return (
           <div>
             <div className="loginMain" >
@@ -25,15 +24,12 @@ class Login extends Component {
               <input
                 type="email"
                 name="email"
-                value={email}
                 placeholder="Enter Email Here"
                 onChange={this.onChange}
               />
-              <nbsp />
               <input
                 type="password"
                 name="password"
-                value={password}
                 placeholder="Enter Password Here"
                 onChange={this.onChange}
               />
@@ -66,6 +62,9 @@ class Login extends Component {
         })
       }
     })
+    .then(err => {
+    console.log(err);
+  })
   }
 }
 export default Login

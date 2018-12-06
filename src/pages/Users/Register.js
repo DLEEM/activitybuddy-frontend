@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import AuthService from '../../services/AuthService'
-import { Redirect, Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 class Register extends Component {
   constructor(props){
@@ -23,7 +23,7 @@ class Register extends Component {
     }
   }
     render() {
-      let { email, password, password_confirmation, address1, city, state, zipcode } = this.state.form.user
+      let { email, address1, city, state, zipcode } = this.state.form.user
         return (
           <main>
     				<h2>Welcome! Register here.</h2>
