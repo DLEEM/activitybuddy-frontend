@@ -22,6 +22,30 @@ class Register extends Component {
       }
     }
   }
+
+  onChange = (e) => {
+    let { form } = this.state
+    form.user[e.target.name] = e.target.value
+    this.setState({ form })
+  }
+
+  onSubmit = (e) => {
+    e.preventDefault()
+    console.log('HEREEEEEEEEEE - onSubmit this.state.form', this.state.form)
+    this.auth.register(this.state.form)
+    .then(json => {
+      console.log("Got to second then:", json)
+      if(json.errors) {
+        this.setState({
+          errors: json.errors
+        })
+      }
+      this.setState({
+        registerSuccess: true
+      })
+    })
+  }
+  
     render() {
       let { email, address1, city, state, zipcode } = this.state.form.user
         return (
@@ -83,28 +107,6 @@ class Register extends Component {
 			    </main>
         )
     }
-    onChange = (e) => {
-		let { form } = this.state
-		form.user[e.target.name] = e.target.value
-		this.setState({ form })
-	}
-
-	onSubmit = (e) => {
-		e.preventDefault()
-    console.log('HEREEEEEEEEEE - onSubmit this.state.form', this.state.form)
-		this.auth.register(this.state.form)
-		.then(json => {
-			console.log("Got to second then:", json)
-			if(json.errors) {
-				this.setState({
-					errors: json.errors
-				})
-			}
-			this.setState({
-				registerSuccess: true
-			})
-		})
-	}
 }
 
 export default Register

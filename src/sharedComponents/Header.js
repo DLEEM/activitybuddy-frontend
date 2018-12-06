@@ -8,28 +8,6 @@ class Header extends Component {
 
     this.auth = new AuthService()
   }
-  render() {
-    return (
-      <Navbar>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <a href="/">Activity Buddy</a>
-          </Navbar.Brand>
-        </Navbar.Header>
-        <Nav>
-          <NavItem eventKey={1} href="/about">
-            About
-          </NavItem>
-          <NavItem eventKey={2} href="/activities">
-            See All Activities
-          </NavItem>
-        </Nav>
-
-        {this.determineButton()}
-
-      </Navbar>
-    );
-  }
 
   determineButton = () => {
     if(!this.auth.loggedIn()) {
@@ -53,6 +31,30 @@ class Header extends Component {
       )
     }
   }
+  
+  render() {
+    return (
+      <Navbar>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <a href="/">Activity Buddy</a>
+          </Navbar.Brand>
+        </Navbar.Header>
+        <Nav>
+          <NavItem eventKey={1} href="/about">
+            About
+          </NavItem>
+          <NavItem eventKey={2} href="/activities">
+            See All Activities
+          </NavItem>
+        </Nav>
+
+        {this.determineButton()}
+
+      </Navbar>
+    );
+  }
+
 }
 
 export default Header;
