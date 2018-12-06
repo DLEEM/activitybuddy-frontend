@@ -6,6 +6,8 @@ import Home from './pages/Home';
 import About from './pages/About';
 import List from './pages/Activities/List';
 import ShowActivity from './pages/Activities/ShowActivity';
+import CreateActivity from './pages/Activities/CreateActivity';
+
 
 import Header from './sharedComponents/Header';
 import Footer from './sharedComponents/Footer';
@@ -17,6 +19,7 @@ class App extends Component {
         <Header />
             <Router>
                 <Switch>
+                  <Route exact path="/activities/new" component={CreateActivity} />
                   <Route exact path="/activities/:id" component={ShowActivity} />
                   <Route exact path="/activities" component={List} />
                   <Route exact path="/about" component={About} />

@@ -17,6 +17,9 @@ class Header extends Component {
           <NavItem eventKey={2} href="/activities">
             See All Activities
           </NavItem>
+          <NavItem eventKey={2} href="/activities/new">
+            Create Activity
+          </NavItem>
         </Nav>
         <Nav className="pull-right">
           <NavItem eventKey={3} href="#">

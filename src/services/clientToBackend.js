@@ -26,6 +26,22 @@ let getUserActivities = function(user_id) {
 
 }
 
+let createActivity = function(activity) {
+  console.log(activity);
+  return fetch(BASE + `/activities`, {
+    body: JSON.stringify(activity),
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: "POST"
+  })
+    .then((resp) => {
+      let json = resp
+      console.log(json);
+      return json
+    })
+}
+
 let destroyActivity = function(id) {
   console.log(id);
   return fetch(BASE + `/activities/${id}`, {
@@ -63,5 +79,6 @@ export {
   getActivity,
   getUserActivities,
   destroyActivity,
-  editActivity
+  editActivity,
+  createActivity
 }
