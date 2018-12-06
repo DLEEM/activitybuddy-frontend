@@ -9,7 +9,7 @@ class Header extends Component {
     this.auth = new AuthService()
   }
 
-  determineButton = () => {
+  loginLogoutButton = () => {
     if(!this.auth.loggedIn()) {
       return(
         <Nav pullRight>
@@ -31,7 +31,7 @@ class Header extends Component {
       )
     }
   }
-  
+
   render() {
     return (
       <Navbar>
@@ -49,7 +49,7 @@ class Header extends Component {
           </NavItem>
         </Nav>
 
-        {this.determineButton()}
+        {this.loginLogoutButton()}
 
       </Navbar>
     );
