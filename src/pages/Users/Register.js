@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import AuthService from '../../services/AuthService'
-import { Redirect, Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 class Register extends Component {
   constructor(props){
@@ -11,34 +11,47 @@ class Register extends Component {
       errors: "",
       form: {
         user: {
-          firstName: "Grant",
-          lastName: "McDonald",
           email: "ram_rancher@example.com",
-          password: "12345"
+          password: "123456",
+          password_confirmation: "123456",
+          address1: "123 Main St.",
+          city: "San Diego",
+          state: "CA",
+          zipcode: "92102"
         }
       }
     }
   }
+
+  onChange = (e) => {
+    let { form } = this.state
+    form.user[e.target.name] = e.target.value
+    this.setState({ form })
+  }
+
+  onSubmit = (e) => {
+    e.preventDefault()
+    console.log('HEREEEEEEEEEE - onSubmit this.state.form', this.state.form)
+    this.auth.register(this.state.form)
+    .then(json => {
+      console.log("Got to second then:", json)
+      if(json.errors) {
+        this.setState({
+          errors: json.errors
+        })
+      }
+      this.setState({
+        registerSuccess: true
+      })
+    })
+  }
+  
     render() {
-      let { firstName, lastName, email, password } = this.state.form.user
+      let { email, address1, city, state, zipcode } = this.state.form.user
         return (
           <main>
     				<h2>Welcome! Register here.</h2>
     				<form onSubmit={this.onSubmit}>
-    					<input
-    						type="text"
-    						name="firstName"
-    						value={firstName}
-    						onChange={this.onChange}
-                required
-    					/>
-    					<input
-    						type="text"
-    						name="lastName"
-    						value={lastName}
-    						onChange={this.onChange}
-                required
-    					/>
     					<input
     						type="email"
     						name="email"
@@ -50,39 +63,50 @@ class Register extends Component {
     					<input
     						type="password"
     						name="password"
-    						value={password}
     						onChange={this.onChange}
                 required
     					/>
+              <input
+    						type="password"
+    						name="password_confirmation"
+    						onChange={this.onChange}
+                required
+    					/>
+              <input
+                type="text"
+                name="address1"
+                value={address1}
+                onChange={this.onChange}
+                required
+              />
+              <input
+                type="text"
+                name="city"
+                value={city}
+                onChange={this.onChange}
+                required
+              />
+              <input
+                type="text"
+                name="state"
+                value={state}
+                onChange={this.onChange}
+                required
+              />
+              <input
+                type="text"
+                name="zipcode"
+                value={zipcode}
+                onChange={this.onChange}
+                required
+              />
     					{this.state.errors.password && <div>Error: Password  {this.state.errors.password[0]}</div>}
     					<button onSubmit={this.onSubmit}>Register</button>
     				</form>
-    				{this.state.registerSuccess && <Redirect to="/apartments" />}
+    				{this.state.registerSuccess && <Redirect to="/activities" />}
 			    </main>
         )
     }
-    onChange = (e) => {
-		let { form } = this.state
-		form.user[e.target.name] = e.target.value
-		this.setState({ form })
-	}
-
-	onSubmit = (e) => {
-		e.preventDefault()
-
-		this.auth.register(this.state.form)
-		.then(json => {
-			console.log("Got to second then:", json)
-			if(json.errors) {
-				this.setState({
-					errors: json.errors
-				})
-			}
-			this.setState({
-				registerSuccess: true
-			})
-		})
-	}
 }
 
 export default Register

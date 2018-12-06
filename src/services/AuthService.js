@@ -2,14 +2,14 @@ import decode from 'jwt-decode'
 
 export default class AuthService {
 	constructor(domain) {
-		this.domain = 'http://localhost:3000'
+		this.domain = 'http://localhost:3001'
 	}
 
-	login = (credentials) => {
-		console.log(credentials)
+	login = (user) => {
+		console.log(user)
 		return this.authFetch(`${this.domain}/users/sign_in`, {
 			method: "POST",
-			body: JSON.stringify(credentials),
+			body: JSON.stringify(user),
 		})
 		.then(statusResponse => {
 			let token = statusResponse.headers.get('Authorization')
@@ -17,16 +17,19 @@ export default class AuthService {
 			console.log(token);
 			this.setToken(token)
 			//return json from response
+			console.log(statusResponse);
 			return statusResponse.json()
 		})
 	}
 
 	register = (user) => {
+		console.log('HEREEEEEEEEEE - AuthService user', user)
 		return this.authFetch(`${this.domain}/users`, {
 			method: "POST",
 			body: JSON.stringify(user),
 		})
 		.then(statusResponse => {
+			console.log(statusResponse);
 			let token = statusResponse.headers.get('Authorization')
 			// set a JWT token in local storage, taken out of response from API
 			console.log(token);
@@ -59,6 +62,7 @@ export default class AuthService {
 	// The token is stored in the browser
 	setToken(token) {
 		console.log(token);
+
 		let parsedToken = token.split('.')[1]
 		localStorage.setItem('id_token', parsedToken)
 	}
@@ -88,7 +92,8 @@ export default class AuthService {
 		if (this.loggedIn()) {
 			headers['Authorization'] = 'Bearer ' + this.getToken()
 		}
-
+		console.log('CHECK OUT THE HEADER', headers)
+		console.log('CHECK OUT THE OPTIONS', options)
 		return fetch(url, {
 			headers,
 			...options

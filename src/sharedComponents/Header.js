@@ -1,7 +1,37 @@
 import React, { Component } from 'react';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import AuthService from '../services/AuthService';
 
 class Header extends Component {
+  constructor(props) {
+    super(props)
+
+    this.auth = new AuthService()
+  }
+
+  loginLogoutButton = () => {
+    if(!this.auth.loggedIn()) {
+      return(
+        <Nav pullRight>
+          <NavItem eventKey={3} href="/login">
+            Log-In
+          </NavItem>
+          <NavItem eventKey={4} href="/register">
+            Register
+          </NavItem>
+        </Nav>
+      )
+    } else {
+      return (
+        <Nav pullRight>
+          <NavItem eventKey={3} href="/" onClick={this.auth.logout}>
+            Log-Out
+          </NavItem>
+        </Nav>
+      )
+    }
+  }
+
   render() {
     return (
       <Navbar>
@@ -18,17 +48,13 @@ class Header extends Component {
             See All Activities
           </NavItem>
         </Nav>
-        <Nav className="pull-right">
-          <NavItem eventKey={3} href="/login">
-            Login
-          </NavItem>
-          <NavItem eventKey={4} href="/register">
-            Register
-          </NavItem>
-        </Nav>
+
+        {this.loginLogoutButton()}
+
       </Navbar>
     );
   }
+
 }
 
 export default Header;
