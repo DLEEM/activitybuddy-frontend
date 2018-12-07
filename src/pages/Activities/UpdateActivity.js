@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import { createActivity } from '../../services/clientToBackend';
+import { getActivity, editActivity } from '../../services/clientToBackend';
 import { Form, FormGroup, Col, FormControl, Button, ControlLabel } from 'react-bootstrap'
 
-class CreateActivity extends Component {
+class UpdateActivity extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -30,7 +30,7 @@ class CreateActivity extends Component {
           <FormGroup>
             <Col>
               <Button type="submit">
-                Create Activity
+                Update Activity
               </Button>
             </Col>
           </FormGroup>
@@ -40,17 +40,10 @@ class CreateActivity extends Component {
     );
   }
 
-  onChange = (e) => {
-    let {activity} = this.state
-    activity[e.target.name] = e.target.value
-    this.setState ({ activity })
-  }
-
   onSubmit = (e) => {
     e.preventDefault()
-    createActivity(this.state.activity)
+    editActivity(this.state.activity)
     .then(json => {
-      console.log("got to the second then:", json)
       if (json.errors) {
         console.log("ERRORS", json.errors)
         this.setState({ errors: json.errors })
@@ -60,6 +53,26 @@ class CreateActivity extends Component {
       }
     })
   }
+
+  onChange = (e) => {
+    let {activity} = this.state
+    activity[e.target.name] = e.target.value
+    this.setState ({ activity })
+  }
+
+  componentDidMount = () => {
+    let index = this.props.match.params.id
+    console.log(index)
+    getActivity(index)
+    .then(activity => {
+      this.setState({
+        activity
+      })
+    })
+    .catch(err => {
+      console.log('ERROR::', err)
+    })
+  }
 }
 
-export default CreateActivity;
+export default UpdateActivity;

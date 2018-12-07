@@ -13,6 +13,7 @@ class ShowActivities extends Component {
     return (
       <div className="App">
         {this.state.activity === {} ? <div>No Activity Selected</div> : <div>{this.state.activity.name}</div>}
+        <a href={`/activities/${this.state.activity.id}/update`}>Update</a>
       </div>
     );
   }
