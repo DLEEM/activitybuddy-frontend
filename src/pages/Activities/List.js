@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Card, CardText, CardBody,
-  CardTitle, Button } from 'reactstrap';
+import { Card, CardText, CardBody, CardTitle, Button } from 'reactstrap';
 import { getActivities } from '../../services/clientToBackend';
+
 
 class ActivityIndex extends Component {
   constructor(props) {

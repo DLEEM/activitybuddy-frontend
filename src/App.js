@@ -9,6 +9,9 @@ import ShowActivity from './pages/Activities/ShowActivity';
 import CreateActivity from './pages/Activities/CreateActivity';
 import UpdateActivity from './pages/Activities/UpdateActivity';
 
+import Login from './pages/Users/Login';
+import Register from './pages/Users/Register';
+
 import Header from './sharedComponents/Header';
 import Footer from './sharedComponents/Footer';
 
@@ -23,6 +26,8 @@ class App extends Component {
                   <Route exact path="/activities/new" component={CreateActivity} />
                   <Route exact path="/activities/:id/update" component={UpdateActivity} />
                   <Route exact path="/activities" component={List} />
+                  <Route exact path="/register" component={Register} />
+                  <Route exact path="/login" component={Login} />
                   <Route exact path="/about" component={About} />
                   <Route exact path="/" component={Home} />
                 </Switch>
