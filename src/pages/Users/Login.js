@@ -1,11 +1,9 @@
-import React, { Component } from 'react'
-import AuthService from '../../services/AuthService'
-import { Redirect } from 'react-router'
+import React, { Component } from 'react';
+import { Redirect } from 'react-router';
 
 class Login extends Component {
   constructor(props){
     super(props)
-    this.auth = new AuthService()
     this.state = {
       loginSuccess: false,
       form: {
@@ -17,7 +15,7 @@ class Login extends Component {
     }
   }
   render() {
-    let { email, password } = this.state.form 
+    let { email, password } = this.state.form
       return (
           <div>
             <div className="loginMain" >
@@ -50,24 +48,10 @@ class Login extends Component {
     this.setState({ form })
   }
   onSubmit = (e) => {
+    console.log(this.props.onLogin)
+    console.log(this.state.form)
     e.preventDefault()
-    this.auth.login(this.state.form)
-    .then(json => {
-      console.log("Got to second then:", json)
-      if(json.errors) {
-        this.setState({
-          errors: json.errors
-        })
-      }else{
-        this.props.checkLogin()
-        this.setState({
-          loginSuccess: true
-        })
-      }
-    })
-    .then(err => {
-    console.log(err);
-  })
+    this.props.onLogin(this.state.form)
   }
 }
 export default Login
