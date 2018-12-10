@@ -25,10 +25,7 @@ class App extends Component {
     this.state = {
       loginSuccess: false,
       form: {
-        user: {
-          email: "",
-          password: "",
-        }
+        user: {}
       }
     }
   }
@@ -62,8 +59,8 @@ class App extends Component {
 
                 // if logged in
               ?  <Switch>
-                  <Route exact path="/activities/:id" component={ShowActivity} />
                   <Route exact path="/activities/new" component={CreateActivity} />
+                  <Route exact path="/activities/:id" component={ShowActivity} />
                   <Route exact path="/activities/:id/update" component={UpdateActivity} />
                   <Route exact path="/activities" component={List} />
                   <Route exact path="/register" component={Register} />
