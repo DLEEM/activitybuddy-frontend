@@ -12,6 +12,7 @@ import UpdateActivity from './pages/Activities/UpdateActivity';
 
 import Login from './pages/Users/Login';
 import Register from './pages/Users/Register';
+import EditProfile from './pages/Users/EditProfile';
 
 import Header from './sharedComponents/Header';
 import Footer from './sharedComponents/Footer';
@@ -63,8 +64,10 @@ class App extends Component {
                   <Route exact path="/activities/:id" component={ShowActivity} />
                   <Route exact path="/activities/:id/update" component={UpdateActivity} />
                   <Route exact path="/activities" component={List} />
+                  // placeholder route for edit user Profile
                   <Route exact path="/register" component={Register} />
                   <Route exact path="/login" render={(props) => <Login onLogin={this.login} />} />
+                  <Route exact path="/editprofile" component={EditProfile} />
                   <Route exact path="/about" component={About} />
                   <Route exact path="/" component={Home} />
                 </Switch>

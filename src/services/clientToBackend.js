@@ -74,11 +74,30 @@ let editActivity = function(activityObject) {
   })
 }
 
+//OwO help me
+let editUser = function(user) {
+  console.log(user.id);
+  return fetch(BASE + `/users/${user.id}`, {
+    method: "PATCH",
+    body: JSON.stringify(user),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(resp => {
+    let json = resp
+    console.log(json.errors);
+    return json
+  })
+}
+
+
 export {
   getActivities,
   getActivity,
   getUserActivities,
   destroyActivity,
   editActivity,
+  editUser,
   createActivity
 }
