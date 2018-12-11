@@ -18,7 +18,7 @@ class ActivityIndex extends Component {
         <div className="card-container">
           {this.state.activities.map((activity, index) => {
             return (
-              <div className="individual-card">
+              <div className="individual-card" key={index}>
                 <Card>
                   <CardBody>
                     <CardTitle>{activity.name}</CardTitle>

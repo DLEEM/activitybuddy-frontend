@@ -9,7 +9,6 @@ import ShowActivity from './pages/Activities/ShowActivity';
 import CreateActivity from './pages/Activities/CreateActivity';
 import UpdateActivity from './pages/Activities/UpdateActivity';
 
-
 import Login from './pages/Users/Login';
 import Register from './pages/Users/Register';
 
@@ -18,15 +17,14 @@ import Footer from './sharedComponents/Footer';
 
 import AuthService from './services/AuthService';
 
+
 class App extends Component {
   constructor(props) {
     super(props)
     this.auth = new AuthService()
     this.state = {
       loginSuccess: false,
-      form: {
-        user: {}
-      }
+      user: {}
     }
   }
 
@@ -39,50 +37,57 @@ class App extends Component {
           errors: json.errors
         })
       } else {
-        this.auth.checkLogin()
         this.setState({
-          loginSuccess: true
+          loginSuccess: true,
+          user: json
         })
+        console.log("This is the state after login: ", this.state)
       }
     })
-    .then(err => {
-    console.log(err);
-  })
+    .catch(err => {
+      console.log(err);
+    })
   }
 
   render() {
     return (
       <div className="App">
-        <Header />
-            <Router>
-              {(this.auth.loggedIn()) //This is where we will need to also check that the user is a moderator
+        
+            <Router >
+              <div>
+                <Header />  
+                {(this.auth.loggedIn() && this.state.user.moderator) //This is where we will need to also check that the user is a moderator
 
-                // if logged in
-              ?  <Switch>
-                  <Route exact path="/activities/new" component={CreateActivity} />
-                  <Route exact path="/activities/:id" component={ShowActivity} />
-                  <Route exact path="/activities/:id/update" component={UpdateActivity} />
-                  <Route exact path="/activities" component={List} />
-                  <Route exact path="/register" component={Register} />
-                  <Route exact path="/login" render={(props) => <Login onLogin={this.login} />} />
-                  <Route exact path="/about" component={About} />
-                  <Route exact path="/" component={Home} />
-                </Switch>
-
-                // if not logged in
-              :  <Switch>
+                  // if logged in
+                ?  <Switch>
+                    <Route exact path="/activities/new" component={CreateActivity} />
+                    <Route exact path="/activities/:id/update" component={UpdateActivity} />
                     <Route exact path="/activities/:id" component={ShowActivity} />
                     <Route exact path="/activities" component={List} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" render={(props) => <Login onLogin={this.login} />} />
                     <Route exact path="/about" component={About} />
                     <Route exact path="/" component={Home} />
-                  </Switch>}
+                  </Switch>
+
+                  // if not logged in
+                :  <Switch>
+                      <Route exact path="/activities/:id" component={ShowActivity} />
+                      <Route exact path="/activities" component={List} />
+                      <Route exact path="/register" component={Register} />
+                      <Route exact path="/login" render={(props) => <Login onLogin={this.login} />} />
+                      <Route exact path="/about" component={About} />
+                      <Route exact path="/" component={Home} />
+                    </Switch>}
+              </div>
             </Router>
         <Footer />
       </div>
     );
   }
+
+ 
+
 }
 
 export default App;
