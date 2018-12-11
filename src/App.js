@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
 
 import Home from './pages/Home';
@@ -71,6 +71,7 @@ class App extends Component {
 
                 // if not logged in
               :  <Switch>
+                    <Redirect from="/activities/new" to="/login" render={(props) => <Login onLogin={this.login} />} />
                     <Route exact path="/activities/:id" component={ShowActivity} />
                     <Route exact path="/activities" component={List} />
                     <Route exact path="/register" component={Register} />
