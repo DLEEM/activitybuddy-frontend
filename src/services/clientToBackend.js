@@ -80,6 +80,24 @@ let editActivity = function(activityObject) {
 //   })
 // }
 
+
+//probably test this
+let editUser = function(user) {
+  console.log(user.id);
+  return fetch(BASE + `/users/${user.id}`, {
+    method: "PATCH",
+    body: JSON.stringify(user),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(resp => {
+    let json = resp
+    console.log(json.errors);
+    return json
+  })
+}
+
 const getAuthService = function() {
   return new AuthService()
 }
@@ -87,10 +105,11 @@ const getAuthService = function() {
 export {
   getActivities,
   getActivity,
-  getUserActivities,
+  createActivity,
   destroyActivity,
   editActivity,
-  createActivity,
-  // getUserData,
-  getUsers
+  getUsers,
+  getUserActivities,
+  editUser,
+  getUserData
 }

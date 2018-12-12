@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import AuthService from '../../services/AuthService'
 import { Redirect } from 'react-router-dom'
+import { Form, FormGroup, Col, FormControl, Button, ControlLabel } from 'react-bootstrap'
 
 class Register extends Component {
   constructor(props){
@@ -11,7 +12,7 @@ class Register extends Component {
       errors: "",
       form: {
         user: {
-          email: "ram_rancher@example.com",
+          email: "tester@example.com",
           password: "123456",
           password_confirmation: "123456",
           address1: "123 Main St.",
@@ -31,10 +32,8 @@ class Register extends Component {
 
   onSubmit = (e) => {
     e.preventDefault()
-    console.log('HEREEEEEEEEEE - onSubmit this.state.form', this.state.form)
     this.auth.register(this.state.form)
     .then(json => {
-      console.log("Got to second then:", json)
       if(json.errors) {
         this.setState({
           errors: json.errors
@@ -45,64 +44,80 @@ class Register extends Component {
       })
     })
   }
-  
+
     render() {
       let { email, address1, city, state, zipcode } = this.state.form.user
         return (
           <main>
     				<h2>Welcome! Register here.</h2>
-    				<form onSubmit={this.onSubmit}>
-    					<input
-    						type="email"
-    						name="email"
-    						value={email}
-    						onChange={this.onChange}
-                required
-    					/>
+    				<Form onSubmit={this.onSubmit}>
+              <FormGroup>
+                <Col componentClass={ControlLabel}>
+                  Email
+                </Col>
+                <Col>
+                  <FormControl onChange={this.onChange} name="email" type="email" value={email} placeholder="email" required/>
+                </Col>
+              </FormGroup>
     					{this.state.errors.email && <div>Error: Email  {this.state.errors.email[0]}</div>}
-    					<input
-    						type="password"
-    						name="password"
-    						onChange={this.onChange}
-                required
-    					/>
-              <input
-    						type="password"
-    						name="password_confirmation"
-    						onChange={this.onChange}
-                required
-    					/>
-              <input
-                type="text"
-                name="address1"
-                value={address1}
-                onChange={this.onChange}
-                required
-              />
-              <input
-                type="text"
-                name="city"
-                value={city}
-                onChange={this.onChange}
-                required
-              />
-              <input
-                type="text"
-                name="state"
-                value={state}
-                onChange={this.onChange}
-                required
-              />
-              <input
-                type="text"
-                name="zipcode"
-                value={zipcode}
-                onChange={this.onChange}
-                required
-              />
+
+              <FormGroup>
+                <Col componentClass={ControlLabel}>
+                  Password
+                </Col>
+                <Col>
+                  <FormControl onChange={this.onChange} name="password" type="password" placeholder="password" required/>
+                </Col>
+              </FormGroup>
+
+              <FormGroup>
+                <Col componentClass={ControlLabel}>
+                  Re-enter Password
+                </Col>
+                <Col>
+                  <FormControl onChange={this.onChange} name="password_confirmation" type="password" placeholder="password" required/>
+                </Col>
+              </FormGroup>
+
+              <FormGroup>
+                <Col componentClass={ControlLabel}>
+                  Address 1
+                </Col>
+                <Col>
+                  <FormControl onChange={this.onChange} name="address1" type="address1" value={address1} placeholder="address1" required/>
+                </Col>
+              </FormGroup>
+
+              <FormGroup>
+                <Col componentClass={ControlLabel}>
+                  City
+                </Col>
+                <Col>
+                  <FormControl onChange={this.onChange} name="city" type="city" value={city} placeholder="city" required/>
+                </Col>
+              </FormGroup>
+
+              <FormGroup>
+                <Col componentClass={ControlLabel}>
+                  State
+                </Col>
+                <Col>
+                  <FormControl onChange={this.onChange} name="state" type="state" value={state} placeholder="state" required/>
+                </Col>
+              </FormGroup>
+
+              <FormGroup>
+                <Col componentClass={ControlLabel}>
+                  Zipcode
+                </Col>
+                <Col>
+                  <FormControl onChange={this.onChange} name="zipcode" type="zipcode" value={zipcode} placeholder="zipcode" required/>
+                </Col>
+              </FormGroup>
+
     					{this.state.errors.password && <div>Error: Password  {this.state.errors.password[0]}</div>}
-    					<button onSubmit={this.onSubmit}>Register</button>
-    				</form>
+    					<Button type="submit">Register</Button>
+    				</Form>
     				{this.state.registerSuccess && <Redirect to="/activities" />}
 			    </main>
         )
