@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { LinkContainer } from 'react-router-bootstrap'
-import { getUserData } from './services/clientToBackend.js'
+// import { getUserData } from './services/clientToBackend.js';
 import './App.css';
 
 import Home from './pages/Home';
@@ -13,6 +12,7 @@ import UpdateActivity from './pages/Activities/UpdateActivity';
 
 import Login from './pages/Users/Login';
 import Register from './pages/Users/Register';
+import UserIndex from './pages/Users/List';
 
 import Header from './sharedComponents/Header';
 import Footer from './sharedComponents/Footer';
@@ -51,17 +51,17 @@ class App extends Component {
     })
   }
 
-  componentDidMount() {
-    if (this.auth.getToken()) {
-      let user_id = this.auth.getUserId()
-      getUserData(user_id)
-      .then((json) => {
-        this.setState({
-          user: json
-        })
-      })
-    }
-  }
+  // componentDidMount() {
+  //   if (this.auth.getToken()) {
+  //     let user_id = this.auth.getUserId()
+  //     getUserData(user_id)
+  //     .then((json) => {
+  //       this.setState({
+  //         user: json
+  //       })
+  //     })
+  //   }
+  // }
 
   render() {
     return (
@@ -79,6 +79,7 @@ class App extends Component {
                     <Route exact path="/activities/:id" component={ShowActivity} />
                     <Route exact path="/activities" component={List} />
                     <Route exact path="/register" component={Register} />
+                    <Route exact path="/users" component={UserIndex} />
                     <Route exact path="/login" render={(props) => <Login onLogin={this.login} />} />
                     <Route exact path="/about" component={About} />
                     <Route exact path="/" component={Home} />
@@ -88,6 +89,7 @@ class App extends Component {
                 :  <Switch>
                       <Route exact path="/activities/:id" component={ShowActivity} />
                       <Route exact path="/activities" component={List} />
+                      <Route exact path="/users" component={UserIndex} />
                       <Route exact path="/register" component={Register} />
                       <Route exact path="/login" render={(props) => <Login onLogin={this.login} />} />
                       <Route exact path="/about" component={About} />
