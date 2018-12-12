@@ -13,6 +13,7 @@ import UpdateActivity from './pages/Activities/UpdateActivity';
 
 import Login from './pages/Users/Login';
 import Register from './pages/Users/Register';
+import EditProfile from './pages/Users/EditProfile';
 
 import Header from './sharedComponents/Header';
 import Footer from './sharedComponents/Footer';
@@ -66,18 +67,21 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-
             <Router >
               <div>
                 <Header />
+      
                 {(this.auth.loggedIn() && this.state.user.moderator) //This is where we will need to also check that the user is a moderator
 
                   // if logged in
                 ?  <Switch>
                     <Route exact path="/activities/:id/update" component={UpdateActivity} />
                     <Route exact path="/activities/new" component={CreateActivity} />
+
                     <Route exact path="/activities/:id" component={ShowActivity} />
                     <Route exact path="/activities" component={List} />
+                    //EditProfile is a placeholder route, replace with users/:id/update
+                    <Route exact path="/editprofile" component={EditProfile} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" render={(props) => <Login onLogin={this.login} />} />
                     <Route exact path="/about" component={About} />
