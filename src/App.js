@@ -13,7 +13,10 @@ import UpdateActivity from './pages/Activities/UpdateActivity';
 
 import Login from './pages/Users/Login';
 import Register from './pages/Users/Register';
+
+import UserIndex from './pages/Users/List';
 import EditProfile from './pages/Users/EditProfile';
+
 
 import Header from './sharedComponents/Header';
 import Footer from './sharedComponents/Footer';
@@ -52,17 +55,17 @@ class App extends Component {
     })
   }
 
-  componentDidMount() {
-    if (this.auth.getToken()) {
-      let user_id = this.auth.getUserId()
-      getUserData(user_id)
-      .then((json) => {
-        this.setState({
-          user: json
-        })
-      })
-    }
-  }
+  // componentDidMount() {
+  //   if (this.auth.getToken()) {
+  //     let user_id = this.auth.getUserId()
+  //     getUserData(user_id)
+  //     .then((json) => {
+  //       this.setState({
+  //         user: json
+  //       })
+  //     })
+  //   }
+  // }
 
   render() {
     return (
@@ -82,6 +85,7 @@ class App extends Component {
                     //EditProfile is a placeholder route, replace with users/:id/update
                     <Route exact path="/editprofile" component={EditProfile} />
                     <Route exact path="/register" component={Register} />
+                    <Route exact path="/users" component={UserIndex} />
                     <Route exact path="/login" render={(props) => <Login onLogin={this.login} onLoginSuccess={this.state.loginSuccess} />} />
                     <Route exact path="/about" component={About} />
                     <Route exact path="/" component={Home} />
@@ -91,6 +95,7 @@ class App extends Component {
                 :  <Switch>
                       <Route exact path="/activities/:id" component={ShowActivity} />
                       <Route exact path="/activities" component={List} />
+                      <Route exact path="/users" component={UserIndex} />
                       <Route exact path="/register" component={Register} />
                       <Route exact path="/login" render={(props) => <Login onLogin={this.login} onLoginSuccess={this.state.loginSuccess} />} />
                       <Route exact path="/about" component={About} />

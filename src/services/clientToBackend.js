@@ -25,6 +25,14 @@ let getUserActivities = function(user_id) {
       })
 }
 
+let getUsers = function() {
+  return fetch(BASE + '/users')
+    .then(resp => {
+      let json = resp.json()
+      return json
+    })
+}
+
 
 let createActivity = function(activity) {
   console.log("AUTHSERVICEGET", getAuthService())
@@ -64,13 +72,14 @@ let editActivity = function(activityObject) {
   })
 }
 
-let getUserData = function(user_id) {
-  return getAuthService().authFetch(BASE + `/users/${user_id}`)
-  .then(resp => {
-    let json = resp.json()
-    return json
-  })
-}
+// let getUserData = function(user_id) {
+//   return fetch(BASE + `/users/${user_id}`)
+//   .then(resp => {
+//     let json = resp.json()
+//     return json
+//   })
+// }
+
 
 //probably test this
 let editUser = function(user) {
@@ -99,6 +108,7 @@ export {
   createActivity,
   destroyActivity,
   editActivity,
+  getUsers,
   getUserActivities,
   editUser,
   getUserData
