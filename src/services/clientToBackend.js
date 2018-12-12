@@ -1,3 +1,4 @@
+import AuthService from './AuthService'
 const BASE = "http://localhost:3001"
 
 let getActivities = function() {
@@ -11,7 +12,6 @@ let getActivities = function() {
 let getActivity = function(id) {
   return fetch(BASE + `/activities/${id}`)
     .then(resp => {
-      console.log(resp)
       let json = resp.json()
       return json
     })
@@ -23,27 +23,21 @@ let getUserActivities = function(user_id) {
         let json = resp.json()
         return json
       })
-
 }
 
+
 let createActivity = function(activity) {
-  console.log(activity);
-  return fetch(BASE + `/activities`, {
+  console.log("AUTHSERVICEGET", getAuthService())
+  return getAuthService().authFetch(BASE + `/activities.json`, {
     body: JSON.stringify(activity),
-    headers: {
-      'Content-Type': 'application/json'
-    },
     method: "POST"
   })
     .then((resp) => {
-      let json = resp
-      console.log(json);
-      return json
+      return resp
     })
 }
 
 let destroyActivity = function(id) {
-  console.log(id);
   return fetch(BASE + `/activities/${id}`, {
     body: JSON.stringify(id),
     headers: {
@@ -53,16 +47,37 @@ let destroyActivity = function(id) {
   })
     .then((resp) => {
       let json = resp
-      console.log(json);
       return json
     })
 }
 
 let editActivity = function(activityObject) {
-  console.log(activityObject.id);
   return fetch(BASE + `/activities/${activityObject.id}`, {
     method: "PATCH",
     body: JSON.stringify(activityObject),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(json => {
+    return json
+  })
+}
+
+let getUserData = function(user_id) {
+  return fetch(BASE + `/users/${user_id}`)
+  .then(resp => {
+    let json = resp.json()
+    return json
+  })
+}
+
+//probably test this
+let editUser = function(user) {
+  console.log(user.id);
+  return fetch(BASE + `/users/${user.id}`, {
+    method: "PATCH",
+    body: JSON.stringify(user),
     headers: {
       'Content-Type': 'application/json'
     }
@@ -74,11 +89,17 @@ let editActivity = function(activityObject) {
   })
 }
 
+const getAuthService = function() {
+  return new AuthService()
+}
+
 export {
   getActivities,
   getActivity,
-  getUserActivities,
+  createActivity,
   destroyActivity,
   editActivity,
-  createActivity
+  getUserActivities,
+  editUser,
+  getUserData
 }

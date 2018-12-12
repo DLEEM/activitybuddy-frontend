@@ -10,7 +10,6 @@ class ShowActivities extends Component {
     }
   }
   render() {
-    console.log(this.state.activity)
     return (
       <div className="App">
         {this.state.activity === {} ? <div>No Activity Selected</div> : <div>{this.state.activity.name}</div>}
