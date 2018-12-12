@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap'
 import { getUserData } from './services/clientToBackend.js'
 import './App.css';
@@ -77,7 +77,6 @@ class App extends Component {
                 ?  <Switch>
                     <Route exact path="/activities/:id/update" component={UpdateActivity} />
                     <Route exact path="/activities/new" component={CreateActivity} />
-
                     <Route exact path="/activities/:id" component={ShowActivity} />
                     <Route exact path="/activities" component={List} />
                     //EditProfile is a placeholder route, replace with users/:id/update

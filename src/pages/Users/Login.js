@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
+import { Form, FormGroup, Col, FormControl, Button, ControlLabel } from 'react-bootstrap'
 
 class Login extends Component {
   constructor(props){
@@ -19,23 +20,27 @@ class Login extends Component {
       return (
           <div>
             <div className="loginMain" >
-              <form onSubmit={this.onSubmit}>
-              <input
-                type="email"
-                name="email"
-                value={email}
-                placeholder="Enter Email Here"
-                onChange={this.onChange}
-              />
-              <input
-                type="password"
-                name="password"
-                value={password}
-                placeholder="Enter Password Here"
-                onChange={this.onChange}
-              />
-              <button onSubmit={this.onSubmit}>Login</button>
-              </form>
+              <Form onSubmit={this.onSubmit}>
+                <FormGroup>
+                  <Col componentClass={ControlLabel}>
+                    Email
+                  </Col>
+                  <Col>
+                    <FormControl onChange={this.onChange} name="email" type="email" value={email} placeholder="email" required/>
+                  </Col>
+                </FormGroup>
+
+                <FormGroup>
+                  <Col componentClass={ControlLabel}>
+                    Password
+                  </Col>
+                  <Col>
+                    <FormControl onChange={this.onChange} name="password" type="password" value={password} placeholder="password" required/>
+                  </Col>
+                </FormGroup>
+
+                <Button type="submit">Login</Button>
+              </Form>
               {this.state.loginSuccess && <Redirect to="/" />}
             </div>
             <p>If you don't have an account, click <a href='/register'>here</a>.</p>
