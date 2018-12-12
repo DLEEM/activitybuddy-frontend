@@ -70,7 +70,7 @@ class App extends Component {
             <Router >
               <div>
                 <Header />
-      
+
                 {(this.auth.loggedIn() && this.state.user.moderator) //This is where we will need to also check that the user is a moderator
 
                   // if logged in

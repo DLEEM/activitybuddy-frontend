@@ -8,10 +8,7 @@ class Login extends Component {
     this.state = {
       loginSuccess: false,
       form: {
-        user: {
-          email: "",
-          password: "",
-        }
+        user: {}
       }
     }
   }
@@ -41,7 +38,9 @@ class Login extends Component {
 
                 <Button type="submit">Login</Button>
               </Form>
+
               {this.state.loginSuccess && <Redirect to="/" />}
+
             </div>
             <p>If you don't have an account, click <a href='/register'>here</a>.</p>
           </div>

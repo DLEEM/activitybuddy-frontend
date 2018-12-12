@@ -14,20 +14,37 @@ class Header extends Component {
     if(!this.auth.loggedIn()) {
       return(
         <Nav pullRight>
-          <NavItem eventKey={3} href="/login">
-            Log-In
-          </NavItem>
-          <NavItem eventKey={4} href="/register">
-            Register
-          </NavItem>
+
+          <LinkContainer to="/register">
+            <NavItem eventKey={3}>
+              Register
+            </NavItem>
+          </LinkContainer>
+
+          <LinkContainer to="/login">
+            <NavItem eventKey={4}>
+              Log-In
+            </NavItem>
+          </LinkContainer>
+
         </Nav>
       )
     } else {
       return (
         <Nav pullRight>
-          <NavItem eventKey={3} href="/" onClick={this.auth.logout}>
-            Log-Out
-          </NavItem>
+
+          <LinkContainer to="/editprofile">
+            <NavItem eventKey={3}>
+              Edit Profile
+            </NavItem>
+          </LinkContainer>
+
+          <LinkContainer to="/about">
+            <NavItem eventKey={4} onClick={this.auth.logout}>
+              Log-Out
+            </NavItem>
+          </LinkContainer>
+
         </Nav>
       )
     }
@@ -36,33 +53,36 @@ class Header extends Component {
   render() {
     return (
       <Navbar>
+
         <Navbar.Header>
           <Navbar.Brand>
+
           <LinkContainer to="/about">
             <div>Activity Buddy</div>
-            
           </LinkContainer>
+
           </Navbar.Brand>
         </Navbar.Header>
+
         <Nav>
           <LinkContainer to="/about">
             <NavItem eventKey={1}>
               About
             </NavItem>
           </LinkContainer>
-          
+
           <LinkContainer to="/activities">
             <NavItem eventKey={2}>
               See All Activities
             </NavItem>
           </LinkContainer>
-          
+
           <LinkContainer to="/activities/new">
             <NavItem eventKey={2}>
               Create Activity
             </NavItem>
           </LinkContainer>
-          
+
         </Nav>
 
         {this.loginLogoutButton()}

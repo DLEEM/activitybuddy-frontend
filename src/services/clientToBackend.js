@@ -65,7 +65,7 @@ let editActivity = function(activityObject) {
 }
 
 let getUserData = function(user_id) {
-  return fetch(BASE + `/users/${user_id}`)
+  return getAuthService().authFetch(BASE + `/users/${user_id}`)
   .then(resp => {
     let json = resp.json()
     return json
