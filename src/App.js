@@ -80,7 +80,10 @@ class App extends Component {
                     <Route exact path="/activities/:id" component={ShowActivity} />
                     <Route exact path="/activities" component={List} />
                     //EditProfile is a placeholder route, replace with users/:id/update
-                    <Route exact path="/editprofile" component={EditProfile} />
+                    <Route
+                      exact path="/editprofile"
+                      render={(props) => <EditProfile userObject={this.state.user} />}
+                    />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" render={(props) => <Login onLogin={this.login} />} />
                     <Route exact path="/about" component={About} />

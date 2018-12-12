@@ -12,8 +12,7 @@ class EditProfile extends Component {
       registerSucces: false,
       errors: "",
       form: {
-        user: {
-        }
+        user: {}
       }
     }
   }
@@ -26,16 +25,7 @@ class EditProfile extends Component {
 
   onSubmit = (e) => {
     e.preventDefault()
-    editUser(this.state.user)
-    .then(json => {
-      if (json.errors) {
-        console.log("ERRORS", json.errors)
-        this.setState({ errors: json.errors })
-      } else {
-        console.log("i am else")
-        this.setState ({ successActivity: true })
-      }
-    })
+    this.props.onLogin(this.state.form)
   }
 
   render() {
@@ -56,41 +46,13 @@ class EditProfile extends Component {
                   onChange={this.onChange}
                   name="email"
                   type="email"
-                  value={this.props.email}
-                  placeholder="email"
+                  placeholder={this.props.userObject.email}
+                  value={email}
                   required/>
               </Col>
             </FormGroup>
 
             {this.state.errors.email && <div>Error: Email  {this.state.errors.email[0]}</div>}
-
-            <FormGroup>
-              <Col componentClass={ControlLabel}>
-                Password
-              </Col>
-              <Col>
-                <FormControl
-                  onChange={this.onChange}
-                  name="password"
-                  type="password"
-                  placeholder="password"
-                  required/>
-              </Col>
-            </FormGroup>
-
-            <FormGroup>
-              <Col componentClass={ControlLabel}>
-                Re-enter Password
-              </Col>
-              <Col>
-                <FormControl
-                  onChange={this.onChange}
-                  name="password_confirmation"
-                  type="password"
-                  placeholder="password"
-                  required/>
-              </Col>
-            </FormGroup>
 
             <FormGroup>
               <Col componentClass={ControlLabel}>
@@ -101,8 +63,8 @@ class EditProfile extends Component {
                   onChange={this.onChange}
                   name="address1"
                   type="address1"
+                  placeholder={this.props.userObject.address1}
                   value={address1}
-                  placeholder="address1"
                   required/>
               </Col>
             </FormGroup>
@@ -116,8 +78,8 @@ class EditProfile extends Component {
                   onChange={this.onChange}
                   name="city"
                   type="city"
+                  placeholder={this.props.userObject.city}
                   value={city}
-                  placeholder="city"
                   required/>
               </Col>
             </FormGroup>
@@ -131,8 +93,8 @@ class EditProfile extends Component {
                   onChange={this.onChange}
                   name="state"
                   type="state"
+                  placeholder={this.props.userObject.state}
                   value={state}
-                  placeholder="state"
                   required/>
               </Col>
             </FormGroup>
@@ -146,8 +108,7 @@ class EditProfile extends Component {
                   onChange={this.onChange}
                   name="zipcode"
                   type="zipcode"
-                  value={zipcode}
-                  placeholder="zipcode"
+                  placeholder={this.props.userObject.zipcode}
                   required/>
               </Col>
             </FormGroup>
