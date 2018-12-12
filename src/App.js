@@ -20,6 +20,7 @@ import Footer from './sharedComponents/Footer';
 
 import AuthService from './services/AuthService';
 
+import ProfilePage from './pages/Users/Show';
 
 class App extends Component {
   constructor(props) {
@@ -79,6 +80,7 @@ class App extends Component {
                     <Route exact path="/activities/new" component={CreateActivity} />
                     <Route exact path="/activities/:id" component={ShowActivity} />
                     <Route exact path="/activities" component={List} />
+                    <Route exact path="/profile" component={ProfilePage} />
                     //EditProfile is a placeholder route, replace with users/:id/update
                     <Route exact path="/editprofile" component={EditProfile} />
                     <Route exact path="/register" component={Register} />
@@ -90,6 +92,7 @@ class App extends Component {
                   // if not logged in
                 :  <Switch>
                       <Route exact path="/activities/:id" component={ShowActivity} />
+                      <Route exact path="/profile" component={ProfilePage} />
                       <Route exact path="/activities" component={List} />
                       <Route exact path="/register" component={Register} />
                       <Route exact path="/login" render={(props) => <Login onLogin={this.login} onLoginSuccess={this.state.loginSuccess} />} />

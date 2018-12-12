@@ -47,3 +47,15 @@
   width: 200px;
   margin: 5px 10px;
 }
+
+.mapPage {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 85vh;
+}
+
+.distances {
+  height: 100px;
+  width: 200px;
+  border: 1px solid black;
+}
