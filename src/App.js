@@ -82,7 +82,7 @@ class App extends Component {
                     //EditProfile is a placeholder route, replace with users/:id/update
                     <Route exact path="/editprofile" component={EditProfile} />
                     <Route exact path="/register" component={Register} />
-                    <Route exact path="/login" render={(props) => <Login onLogin={this.login} />} />
+                    <Route exact path="/login" render={(props) => <Login onLogin={this.login} onLoginSuccess={this.state.loginSuccess} />} />
                     <Route exact path="/about" component={About} />
                     <Route exact path="/" component={Home} />
                   </Switch>
@@ -92,7 +92,7 @@ class App extends Component {
                       <Route exact path="/activities/:id" component={ShowActivity} />
                       <Route exact path="/activities" component={List} />
                       <Route exact path="/register" component={Register} />
-                      <Route exact path="/login" render={(props) => <Login onLogin={this.login} />} />
+                      <Route exact path="/login" render={(props) => <Login onLogin={this.login} onLoginSuccess={this.state.loginSuccess} />} />
                       <Route exact path="/about" component={About} />
                       <Route exact path="/" component={Home} />
                     </Switch>}
