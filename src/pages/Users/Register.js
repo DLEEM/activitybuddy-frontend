@@ -12,7 +12,7 @@ class Register extends Component {
       errors: "",
       form: {
         user: {
-          email: "ram_rancher@example.com",
+          email: "tester@example.com",
           password: "123456",
           password_confirmation: "123456",
           address1: "123 Main St.",
@@ -32,10 +32,8 @@ class Register extends Component {
 
   onSubmit = (e) => {
     e.preventDefault()
-    console.log('HEREEEEEEEEEE - onSubmit this.state.form', this.state.form)
     this.auth.register(this.state.form)
     .then(json => {
-      console.log("Got to second then:", json)
       if(json.errors) {
         this.setState({
           errors: json.errors

@@ -6,7 +6,6 @@ class Login extends Component {
   constructor(props){
     super(props)
     this.state = {
-      loginSuccess: false,
       form: {
         user: {
           email: "",
@@ -41,7 +40,8 @@ class Login extends Component {
 
                 <Button type="submit">Login</Button>
               </Form>
-              {this.state.loginSuccess && <Redirect to="/" />}
+              {console.log(this.props)}
+              {this.props.onLoginSuccess && <Redirect to="/" />}
             </div>
             <p>If you don't have an account, click <a href='/register'>here</a>.</p>
           </div>
