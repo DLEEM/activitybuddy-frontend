@@ -14,7 +14,7 @@ export default class AuthService {
 		.then(statusResponse => {
 			let token = statusResponse.headers.get('Authorization')
 			// set a JWT token in local storage, taken out of response from API
-			console.log(token);
+			console.log("string", decode(token));
 			this.setToken(token)
 			//return json from response
 			console.log(statusResponse);
@@ -23,16 +23,13 @@ export default class AuthService {
 	}
 
 	register = (user) => {
-		console.log('HEREEEEEEEEEE - AuthService user', user)
 		return this.authFetch(`${this.domain}/users`, {
 			method: "POST",
 			body: JSON.stringify(user),
 		})
 		.then(statusResponse => {
-			console.log(statusResponse);
 			let token = statusResponse.headers.get('Authorization')
 			// set a JWT token in local storage, taken out of response from API
-			console.log(token);
 			this.setToken(token)
 			//return json from response
 			return statusResponse.json()
@@ -63,7 +60,7 @@ export default class AuthService {
 	setToken(token) {
 		console.log(token);
 
-		let parsedToken = token.split('.')[1]
+		let parsedToken = token.split(' ')[1]
 		localStorage.setItem('id_token', parsedToken)
 	}
 
@@ -79,11 +76,11 @@ export default class AuthService {
 
 	getUserId = () => {
 		const token = decode(this.getToken(), { header: true });
-		console.log(token);
 		return token.sub
 	}
 
 	authFetch = (url, options) => {
+		console.log("authFetch being called!")
 		const headers = {
 			'Accept': 'application/json',
 			'Content-Type': 'application/json'
@@ -92,15 +89,12 @@ export default class AuthService {
 		if (this.loggedIn()) {
 			headers['Authorization'] = 'Bearer ' + this.getToken()
 		}
-		console.log('CHECK OUT THE HEADER', headers)
-		console.log('CHECK OUT THE OPTIONS', options)
 		return fetch(url, {
 			headers,
 			...options
 		})
 		.then(apiResponse => this._checkStatus(apiResponse))
 		.catch(err => {
-			console.log("::: FETCH ERROR CAUGHT:::", err)
 			return err
 		})
 	}
