@@ -75,12 +75,11 @@ export default class AuthService {
 	}
 
 	getUserId = () => {
-		const token = decode(this.getToken(), { header: true });
+		const token = decode(this.getToken());
 		return token.sub
 	}
 
 	authFetch = (url, options) => {
-		console.log("authFetch being called!")
 		const headers = {
 			'Accept': 'application/json',
 			'Content-Type': 'application/json'
@@ -103,7 +102,6 @@ export default class AuthService {
 		// console log message on whether or not the http response shows success
 		// if in a real application, this would be handled more extensively
 		if(response.status >= 200 && response.status < 300) {
-			console.log(":::SUCCESS:::");
 		} else {
 			console.log(":::ERROR:::", response)
 		}
