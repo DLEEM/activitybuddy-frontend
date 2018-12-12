@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap'
+import { getUserData } from './services/clientToBackend.js'
 import './App.css';
 
 import Home from './pages/Home';
@@ -49,19 +51,31 @@ class App extends Component {
     })
   }
 
+  componentDidMount() {
+    if (this.auth.getToken()) {
+      let user_id = this.auth.getUserId()
+      getUserData(user_id)
+      .then((json) => {
+        this.setState({
+          user: json
+        })
+      })
+    }
+  }
+
   render() {
     return (
       <div className="App">
-        
+
             <Router >
               <div>
-                <Header />  
+                <Header />
                 {(this.auth.loggedIn() && this.state.user.moderator) //This is where we will need to also check that the user is a moderator
 
                   // if logged in
                 ?  <Switch>
-                    <Route exact path="/activities/new" component={CreateActivity} />
                     <Route exact path="/activities/:id/update" component={UpdateActivity} />
+                    <Route exact path="/activities/new" component={CreateActivity} />
                     <Route exact path="/activities/:id" component={ShowActivity} />
                     <Route exact path="/activities" component={List} />
                     <Route exact path="/register" component={Register} />
@@ -86,7 +100,7 @@ class App extends Component {
     );
   }
 
- 
+
 
 }
 
