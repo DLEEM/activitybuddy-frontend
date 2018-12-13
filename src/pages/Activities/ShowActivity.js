@@ -15,6 +15,7 @@ class ShowActivities extends Component {
         {this.state.activity === {} ? <div>No Activity Selected</div> : <div>{this.state.activity.name}</div>}
         <a href={`/activities/${this.state.activity.id}/update`}>Update</a>
         <a onClick={() => this.destroyActivity(this.state.activity.id)} href="/activities">Delete</a>
+        <a href={`/activities/${this.state.activity.id}/users`}>See Users</a>
       </div>
     );
   }

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-import { LinkContainer } from 'react-router-bootstrap'
-import { getUserData } from './services/clientToBackend.js'
+import { LinkContainer } from 'react-router-bootstrap';
+import { getUserData } from './services/clientToBackend';
+import { editUser } from './services/clientToBackend';
 import './App.css';
 
 import Home from './pages/Home';
@@ -21,6 +22,7 @@ import Footer from './sharedComponents/Footer';
 
 import AuthService from './services/AuthService';
 
+import ActivityUsers from './pages/ActivityUsers/ShowActivityUsers';
 
 class App extends Component {
   constructor(props) {
@@ -32,10 +34,13 @@ class App extends Component {
     }
   }
 
+  register = (user) => {
+
+  }
+
   login = (user) => {
     this.auth.login(user)
     .then(json => {
-      console.log("Got to second then:", json)
       if (json.errors) {
         this.setState({
           errors: json.errors
@@ -45,7 +50,21 @@ class App extends Component {
           loginSuccess: true,
           user: json
         })
-        console.log("This is the state after login: ", this.state)
+      }
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
+
+  updateProfile = (user) => {
+    console.log(user);
+    editUser(user)
+    .then(json =>{
+      if(json.errors) {
+        this.setstate({
+          errors: json.errors
+        })
       }
     })
     .catch(err => {
@@ -76,13 +95,18 @@ class App extends Component {
 
                   // if logged in
                 ?  <Switch>
+                    <Route exact path="/activities/:id/users" component={ActivityUsers} />
                     <Route exact path="/activities/:id/update" component={UpdateActivity} />
                     <Route exact path="/activities/new" component={CreateActivity} />
                     <Route exact path="/activities/:id" component={ShowActivity} />
                     <Route exact path="/activities" component={List} />
                     <Route exact path="/users/:id" component={ShowUser} />
                     //EditProfile is a placeholder route, replace with users/:id/update
-                    <Route exact path="/editprofile" component={EditProfile} />
+                    <Route
+                      exact path="/editprofile"
+                      render={(props) => <EditProfile userObject={this.state.user}
+                      onUpdate={this.updateProfile} />}
+                    />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" render={(props) => <Login onLogin={this.login} onLoginSuccess={this.state.loginSuccess} />} />
                     <Route exact path="/about" component={About} />
