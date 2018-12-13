@@ -16,7 +16,7 @@ class EditProfile extends Component {
       }
     }
   }
-  //componentDidMount for setting state as props
+  
   componentDidMount() {
     const userObject = this.props.userObject
     this.setState({
@@ -32,12 +32,11 @@ class EditProfile extends Component {
     this.setState({ form })
   }
 
-  //move this guy to App.js
   onSubmit = (e) => {
     e.preventDefault()
     this.props.onUpdate(this.state.form)
   }
-  //populate form with info from state so it can be edited
+
   render() {
     let { email, address1, city, state, zipcode } = this.state.form.user
       return (
