@@ -10,13 +10,14 @@ let getActivities = function() {
 }
 
 let getActivity = function(id) {
-  return fetch(BASE + `/activities/${id}`)
+  return getAuthService().authFetch(BASE + `/activities/${id}`)
     .then(resp => {
       let json = resp.json()
       return json
     })
 }
 
+// LME:: do we actually want/need this function? getActivityUsers() makes more sense to me
 let getUserActivities = function(user_id) {
   return fetch(BASE + `/users/${user_id}/activities`)
     .then(resp => {
@@ -25,6 +26,13 @@ let getUserActivities = function(user_id) {
       })
 }
 
+let getActivityUsers = function(activity_id) {
+  return getAuthService().authFetch(BASE + `/activities/${activity_id}/users`)
+    .then(resp => {
+      let json = resp.json()
+      return json
+    })
+}
 
 let createActivity = function(activity) {
   console.log("AUTHSERVICEGET", getAuthService())
@@ -101,5 +109,6 @@ export {
   editActivity,
   getUserActivities,
   editUser,
-  getUserData
+  getUserData,
+  getActivityUsers
 }

@@ -20,6 +20,7 @@ import Footer from './sharedComponents/Footer';
 
 import AuthService from './services/AuthService';
 
+import ActivityUsers from './pages/ActivityUsers/ShowActivityUsers';
 
 class App extends Component {
   constructor(props) {
@@ -75,6 +76,7 @@ class App extends Component {
 
                   // if logged in
                 ?  <Switch>
+                    <Route exact path="/activities/:id/users" component={ActivityUsers} />
                     <Route exact path="/activities/:id/update" component={UpdateActivity} />
                     <Route exact path="/activities/new" component={CreateActivity} />
                     <Route exact path="/activities/:id" component={ShowActivity} />
