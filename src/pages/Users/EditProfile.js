@@ -17,13 +17,14 @@ class EditProfile extends Component {
       }
     }
   }
-
+  //componentDidMount for setting state as props
   onChange = (e) => {
     let { form } = this.state
     form.user[e.target.name] = e.target.value
     this.setState({ form })
   }
 
+  //move this guy to App.js
   onSubmit = (e) => {
     e.preventDefault()
     editUser(this.state.user)
@@ -37,7 +38,7 @@ class EditProfile extends Component {
       }
     })
   }
-
+  //populate form with info from state so it can be edited
   render() {
     let { email, address1, city, state, zipcode } = this.state.form.user
       return (
@@ -56,6 +57,7 @@ class EditProfile extends Component {
                   onChange={this.onChange}
                   name="email"
                   type="email"
+
                   value={this.props.email}
                   placeholder="email"
                   required/>
