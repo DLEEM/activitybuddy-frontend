@@ -43,7 +43,7 @@ class EditProfile extends Component {
       return (
         <main>
           <h2>Edit your profile information.</h2>
-          {console.log(this.state)}
+
           <Form onSubmit={this.onSubmit}>
 
             <FormGroup>
