@@ -14,8 +14,8 @@ import UpdateActivity from './pages/Activities/UpdateActivity';
 
 import Login from './pages/Users/Login';
 import Register from './pages/Users/Register';
+import MyProfile from './pages/Users/MyProfile';
 import EditProfile from './pages/Users/EditProfile';
-import YourProfile from './pages/YourProfile/YourProfile';
 
 import Header from './sharedComponents/Header';
 import Footer from './sharedComponents/Footer';
@@ -101,12 +101,12 @@ class App extends Component {
                     <Route exact path="/activities/:id" component={ShowActivity} />
                     <Route exact path="/activities" component={List} />
                     <Route
-                      exact path="/editprofile"
+                      exact path="/myprofile/update"
                       render={(props) => <EditProfile
                       userObject={this.state.user}
                       onUpdate={this.updateProfile} />}
                     />
-                    <Route exact path="/yourprofile" component={YourProfile} />
+                  <Route exact path="/myprofile" component={MyProfile} />
                     <Route exact path="/register" component={Register} />
                     <Route
                       exact path="/login"

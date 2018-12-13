@@ -35,7 +35,7 @@ class YourProfile extends Component {
         {this.state.user.zipcode}<br/>
 
         <ButtonToolbar>
-          <Button variant="link" href="/editprofile">Edit</Button>
+          <Button variant="link" href="/myprofile/update">Edit</Button>
         </ButtonToolbar>
       </div>
     );
