@@ -36,7 +36,7 @@ class EditProfile extends Component {
     e.preventDefault()
     this.props.onUpdate(this.state.form)
   }
-
+  
   render() {
     let { email, address1, city, state, zipcode } = this.state.form.user
       return (
