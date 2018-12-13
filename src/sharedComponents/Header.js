@@ -33,9 +33,9 @@ class Header extends Component {
       return (
         <Nav pullRight>
 
-          <LinkContainer to="/editprofile">
+          <LinkContainer to="/yourprofile">
             <NavItem eventKey={3}>
-              Edit Profile
+              View Profile
             </NavItem>
           </LinkContainer>
 

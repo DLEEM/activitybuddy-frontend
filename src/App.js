@@ -15,6 +15,7 @@ import UpdateActivity from './pages/Activities/UpdateActivity';
 import Login from './pages/Users/Login';
 import Register from './pages/Users/Register';
 import EditProfile from './pages/Users/EditProfile';
+import YourProfile from './pages/YourProfile/YourProfile';
 
 import Header from './sharedComponents/Header';
 import Footer from './sharedComponents/Footer';
@@ -90,28 +91,34 @@ class App extends Component {
               <div>
                 <Header />
 
-                {(this.auth.loggedIn() && this.state.user.moderator) //This is where we will need to also check that the user is a moderator
+                {(this.auth.loggedIn() && this.state.user.moderator)
 
-                  // if logged in
+
                 ?  <Switch>
                     <Route exact path="/activities/:id/users" component={ActivityUsers} />
                     <Route exact path="/activities/:id/update" component={UpdateActivity} />
                     <Route exact path="/activities/new" component={CreateActivity} />
                     <Route exact path="/activities/:id" component={ShowActivity} />
                     <Route exact path="/activities" component={List} />
-                    //EditProfile is a placeholder route, replace with users/:id/update
                     <Route
                       exact path="/editprofile"
-                      render={(props) => <EditProfile userObject={this.state.user}
+                      render={(props) => <EditProfile
+                      userObject={this.state.user}
                       onUpdate={this.updateProfile} />}
                     />
+                    <Route exact path="/yourprofile" component={YourProfile} />
                     <Route exact path="/register" component={Register} />
-                    <Route exact path="/login" render={(props) => <Login onLogin={this.login} onLoginSuccess={this.state.loginSuccess} />} />
+                    <Route
+                      exact path="/login"
+                      render={(props) => <Login
+                      onLogin={this.login}
+                      onLoginSuccess={this.state.loginSuccess} />}
+                    />
                     <Route exact path="/about" component={About} />
                     <Route exact path="/" component={Home} />
                   </Switch>
 
-                  // if not logged in
+
                 :  <Switch>
                       <Route exact path="/activities/:id" component={ShowActivity} />
                       <Route exact path="/activities" component={List} />
