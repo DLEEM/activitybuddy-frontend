@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { getActivity, destroyActivity } from '../../services/clientToBackend';
+import { Button, ButtonToolbar } from 'react-bootstrap';
 
 class ShowActivities extends Component {
   constructor(props) {
@@ -12,10 +13,15 @@ class ShowActivities extends Component {
   render() {
     return (
       <div className="App">
-        {this.state.activity === {} ? <div>No Activity Selected</div> : <div>{this.state.activity.name}</div>}
-        <a href={`/activities/${this.state.activity.id}/update`}>Update</a>
-        <a onClick={() => this.destroyActivity(this.state.activity.id)} href="/activities">Delete</a>
-        <a href={`/activities/${this.state.activity.id}/users`}>See Users</a>
+
+        {this.state.activity === {}
+        ? <div>No Activity Selected</div>
+        : <div>{this.state.activity.name}</div>}
+
+        <ButtonToolbar>
+          {this.moderatorButtons()}
+          <Button variant="link" href={`/activity/${this.state.activity.id}/update`}>See Buddies</Button>
+        </ButtonToolbar>
       </div>
     );
   }
@@ -30,9 +36,23 @@ class ShowActivities extends Component {
     })
   }
 
+  moderatorButtons = () => {
+    if (this.props.modStatus) {
+      return (
+        <div>
+          <Button variant="link" href="/myprofile/update">Edit</Button>
+          <Button variant="link" href="/myprofile/update">Delete</Button>
+        </div>
+    )
+      }
+  }
+
+  userButtons = () => {
+
+  }
+
   componentDidMount() {
     let index = this.props.match.params.id
-    console.log(index)
     getActivity(index)
     .then(activity => {
       this.setState({

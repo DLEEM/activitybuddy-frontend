@@ -97,16 +97,27 @@ class App extends Component {
                 ?  <Switch>
                     <Route exact path="/activities/:id/users" component={ActivityUsers} />
                     <Route exact path="/activities/:id/update" component={UpdateActivity} />
-                    <Route exact path="/activities/new" component={CreateActivity} />
-                    <Route exact path="/activities/:id" component={ShowActivity} />
-                    <Route exact path="/activities" component={List} />
+                    <Route
+                      exact path="/activities/new"
+                      render={(props) => <CreateActivity />}
+                    />
+                    <Route
+                      exact path="/activities/:id"
+                      render={(props) => <ShowActivity
+                      modStatus={this.state.user.moderator} />}
+                    />
+                    <Route
+                      exact path="/activities" 
+                      render={(props) => <List
+                      modStatus={this.state.user.moderator} />}
+                    />
                     <Route
                       exact path="/myprofile/update"
                       render={(props) => <EditProfile
                       userObject={this.state.user}
                       onUpdate={this.updateProfile} />}
                     />
-                  <Route exact path="/myprofile" component={MyProfile} />
+                    <Route exact path="/myprofile" component={MyProfile} />
                     <Route exact path="/register" component={Register} />
                     <Route
                       exact path="/login"
@@ -123,7 +134,11 @@ class App extends Component {
                       <Route exact path="/activities/:id" component={ShowActivity} />
                       <Route exact path="/activities" component={List} />
                       <Route exact path="/register" component={Register} />
-                      <Route exact path="/login" render={(props) => <Login onLogin={this.login} onLoginSuccess={this.state.loginSuccess} />} />
+                      <Route exact path="/login"
+                        render={(props) => <Login
+                        onLogin={this.login}
+                        onLoginSuccess={this.state.loginSuccess} />}
+                      />
                       <Route exact path="/about" component={About} />
                       <Route exact path="/" component={Home} />
                     </Switch>}

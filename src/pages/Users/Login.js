@@ -37,7 +37,6 @@ class Login extends Component {
 
                 <Button type="submit">Login</Button>
               </Form>
-              {console.log(this.props)}
               {this.props.onLoginSuccess && <Redirect to="/" />}
             </div>
             <p>If you don't have an account, click <a href='/register'>here</a>.</p>
@@ -50,8 +49,6 @@ class Login extends Component {
     this.setState({ form })
   }
   onSubmit = (e) => {
-    console.log(this.props.onLogin)
-    console.log(this.state.form)
     e.preventDefault()
     this.props.onLogin(this.state.form)
   }
