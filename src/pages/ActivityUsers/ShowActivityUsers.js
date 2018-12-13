@@ -8,12 +8,21 @@ class ActivityUsers extends Component {
       users: []
     }
   }
+
+
   render() {
+    console.log(this.state.users)
     return (
       <div className="App">
         Activity Users
         {this.state.users.length == 0 ? <div>No Users Found</div> :
-          <div>{this.state.users[0].email}</div>}
+          this.state.users.map(user => {
+            return (
+              <div>{this.state.users[0].email}<br/>
+                Address: {user.address1} {user.city}, {user.state} {user.zipcode}
+              </div>
+            )
+          })}
       </div>
     )
   }
