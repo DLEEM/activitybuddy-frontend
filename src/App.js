@@ -62,7 +62,7 @@ class App extends Component {
     .then(json =>{
       if(json.errors) {
         this.setstate({
-          errors:json.errors
+          errors: json.errors
         })
       }
     })
