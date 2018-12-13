@@ -12,10 +12,18 @@ class EditProfile extends Component {
       registerSucces: false,
       errors: "",
       form: {
-        user: {
-        }
+        user: {}
       }
     }
+  }
+  //componentDidMount for setting state as props
+  componentDidMount() {
+    const userObject = this.props.userObject
+    this.setState({
+      form: {
+        user: userObject
+      }
+    })
   }
 
   onChange = (e) => {
@@ -24,27 +32,18 @@ class EditProfile extends Component {
     this.setState({ form })
   }
 
+  //move this guy to App.js
   onSubmit = (e) => {
     e.preventDefault()
-    editUser(this.state.user)
-    .then(json => {
-      if (json.errors) {
-        console.log("ERRORS", json.errors)
-        this.setState({ errors: json.errors })
-      } else {
-        console.log("i am else")
-        this.setState ({ successActivity: true })
-      }
-    })
+    this.props.onUpdate(this.state.form)
   }
-
+  //populate form with info from state so it can be edited
   render() {
     let { email, address1, city, state, zipcode } = this.state.form.user
       return (
         <main>
-
           <h2>Edit your profile information.</h2>
-
+          {console.log(this.state)}
           <Form onSubmit={this.onSubmit}>
 
             <FormGroup>
@@ -56,41 +55,12 @@ class EditProfile extends Component {
                   onChange={this.onChange}
                   name="email"
                   type="email"
-                  value={this.props.email}
-                  placeholder="email"
+                  value={email}
                   required/>
               </Col>
             </FormGroup>
 
             {this.state.errors.email && <div>Error: Email  {this.state.errors.email[0]}</div>}
-
-            <FormGroup>
-              <Col componentClass={ControlLabel}>
-                Password
-              </Col>
-              <Col>
-                <FormControl
-                  onChange={this.onChange}
-                  name="password"
-                  type="password"
-                  placeholder="password"
-                  required/>
-              </Col>
-            </FormGroup>
-
-            <FormGroup>
-              <Col componentClass={ControlLabel}>
-                Re-enter Password
-              </Col>
-              <Col>
-                <FormControl
-                  onChange={this.onChange}
-                  name="password_confirmation"
-                  type="password"
-                  placeholder="password"
-                  required/>
-              </Col>
-            </FormGroup>
 
             <FormGroup>
               <Col componentClass={ControlLabel}>
@@ -102,7 +72,6 @@ class EditProfile extends Component {
                   name="address1"
                   type="address1"
                   value={address1}
-                  placeholder="address1"
                   required/>
               </Col>
             </FormGroup>
@@ -117,7 +86,6 @@ class EditProfile extends Component {
                   name="city"
                   type="city"
                   value={city}
-                  placeholder="city"
                   required/>
               </Col>
             </FormGroup>
@@ -132,7 +100,6 @@ class EditProfile extends Component {
                   name="state"
                   type="state"
                   value={state}
-                  placeholder="state"
                   required/>
               </Col>
             </FormGroup>
@@ -147,7 +114,6 @@ class EditProfile extends Component {
                   name="zipcode"
                   type="zipcode"
                   value={zipcode}
-                  placeholder="zipcode"
                   required/>
               </Col>
             </FormGroup>

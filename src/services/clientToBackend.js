@@ -82,8 +82,9 @@ let getUserData = function(user_id) {
 
 //probably test this
 let editUser = function(user) {
-  console.log(user.id);
-  return fetch(BASE + `/users/${user.id}`, {
+  let user_id = getAuthService().getUserId()
+  console.log(user_id);
+  return getAuthService().authFetch(BASE + `/users/${user_id}`, {
     method: "PATCH",
     body: JSON.stringify(user),
     headers: {
