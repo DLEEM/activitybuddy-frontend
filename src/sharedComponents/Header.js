@@ -33,9 +33,10 @@ class Header extends Component {
       return (
         <Nav pullRight>
 
-          <LinkContainer to='/myprofile'>
+
+          <LinkContainer to="/myprofile">
             <NavItem eventKey={3}>
-              Your Profile
+              View Profile
             </NavItem>
           </LinkContainer>
 
@@ -57,7 +58,7 @@ class Header extends Component {
         <Navbar.Header>
           <Navbar.Brand>
 
-          <LinkContainer to="/about">
+          <LinkContainer to="/">
             <div>Activity Buddy</div>
           </LinkContainer>
 
@@ -73,13 +74,7 @@ class Header extends Component {
 
           <LinkContainer to="/activities">
             <NavItem eventKey={2}>
-              See All Activities
-            </NavItem>
-          </LinkContainer>
-
-          <LinkContainer to="/activities/new">
-            <NavItem eventKey={2}>
-              Create Activity
+              Activities
             </NavItem>
           </LinkContainer>
 

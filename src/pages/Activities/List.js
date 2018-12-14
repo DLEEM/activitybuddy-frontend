@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardText, CardBody, CardTitle, Button } from 'reactstrap';
+import { Card, CardText, CardBody, CardTitle, Button, ButtonToolbar } from 'reactstrap';
 import { getActivities } from '../../services/clientToBackend';
 
 
@@ -14,24 +14,37 @@ class ActivityIndex extends Component {
   render() {
     return (
       <div className="App">
-        ACTIVITY INDEX:
-        <div className="card-container">
-          {this.state.activities.map((activity, index) => {
-            return (
-              <div className="individual-card" key={index}>
-                <Card>
-                  <CardBody>
-                    <CardTitle>{activity.name}</CardTitle>
-                    <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-                    <Button href={`/activities/${activity.id}`}>More Details</Button>
-                  </CardBody>
-                </Card>
-              </div>
-            )
-          })}
-        </div>
+        <ButtonToolbar>
+          {this.moderatorButtons()}
+        </ButtonToolbar>
+          <div className="card-container">
+            {this.state.activities.map((activity, index) => {
+              return (
+                <div className="individual-card" key={index}>
+                  <Card>
+                    <CardBody>
+                      <CardTitle>{activity.name}</CardTitle>
+                      <CardText>BOTTOM TEXT</CardText>
+                      <Button href={`/activities/${activity.id}`}>More Details</Button>
+                    </CardBody>
+                  </Card>
+                </div>
+              )
+            })}
+          </div>
       </div>
     );
+  }
+
+  moderatorButtons = () => {
+    console.log(this.props.modstatus);
+    if (this.props.modStatus) {
+      return (
+        <div>
+          <Button variant="link" href="/activities/new">Create Activity</Button>
+        </div>
+      )
+    }
   }
 
   componentDidMount() {
