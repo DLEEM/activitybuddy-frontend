@@ -16,6 +16,7 @@ import Login from './pages/Users/Login';
 import Register from './pages/Users/Register';
 import MyProfile from './pages/Users/MyProfile';
 import EditProfile from './pages/Users/EditProfile';
+import ShowUser from './pages/Users/ShowUser';
 
 import Header from './sharedComponents/Header';
 import Footer from './sharedComponents/Footer';
@@ -97,6 +98,11 @@ class App extends Component {
                 ?  <Switch>
                     <Route exact path="/activities/:id/users" component={ActivityUsers} />
                     <Route exact path="/activities/:id/update" component={UpdateActivity} />
+                    <Route exact path="/activities/new" component={CreateActivity} />
+                    <Route exact path="/activities/:id" component={ShowActivity} />
+                    <Route exact path="/activities" component={List} />
+                    <Route exact path="/users/:id" component={ShowUser} />
+                    //EditProfile is a placeholder route, replace with users/:id/update
                     <Route
                       exact path="/activities/new"
                       render={(props) => <CreateActivity />}
@@ -141,7 +147,7 @@ class App extends Component {
                       />
                       <Route exact path="/about" component={About} />
                       <Route exact path="/" component={Home} />
-                    </Switch>}
+                   </Switch>}
               </div>
             </Router>
         <Footer />

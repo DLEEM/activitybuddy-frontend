@@ -1,6 +1,7 @@
 import AuthService from './AuthService'
 const BASE = "http://localhost:3001"
 
+//Activities Requests
 let getActivities = function() {
   return fetch(BASE + '/activities')
     .then(resp => {
@@ -72,15 +73,23 @@ let editActivity = function(activityObject) {
   })
 }
 
-let getUserData = function(user_id) {
-  return getAuthService().authFetch(BASE + `/users/${user_id}`)
-  .then(resp => {
-    let json = resp.json()
-    return json
-  })
+//Users Requests
+let getUsers = function() {
+  return fetch(BASE + '/users')
+    .then(resp => {
+      let json = resp.json()
+      return json
+    })
 }
 
-//probably test this
+let getUser = function(id) {
+  return fetch(BASE + `/users/${id}`)
+    .then(resp => {
+      let json = resp.json()
+      return json
+    })
+}
+
 let editUser = function(user) {
   let user_id = getAuthService().getUserId()
   console.log(user_id);
@@ -98,6 +107,15 @@ let editUser = function(user) {
   })
 }
 
+//Utility Stuff
+let getUserData = function(user_id) {
+  return getAuthService().authFetch(BASE + `/users/${user_id}`)
+  .then(resp => {
+    let json = resp.json()
+    return json
+  })
+}
+
 const getAuthService = function() {
   return new AuthService()
 }
@@ -109,6 +127,8 @@ export {
   destroyActivity,
   editActivity,
   getUserActivities,
+  getUser,
+  getUsers,
   editUser,
   getUserData,
   getActivityUsers

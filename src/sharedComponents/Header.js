@@ -9,7 +9,7 @@ class Header extends Component {
 
     this.auth = new AuthService()
   }
-
+  //move Create Activity and Update/Delete buttons to the activity component, only shown if logged in as moderator
   loginLogoutButton = () => {
     if(!this.auth.loggedIn()) {
       return(
@@ -32,6 +32,7 @@ class Header extends Component {
     } else {
       return (
         <Nav pullRight>
+
 
           <LinkContainer to="/myprofile">
             <NavItem eventKey={3}>
