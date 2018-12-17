@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-// import { getActivityUsers } from '../../services/clientToBackend';
+import { getUser, getActivityUsers } from '../../services/clientToBackend';
+import AuthService from '../../services/AuthService';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
-const apiKey = 'AIzaSyDPJJChG0F7S36LTQrSy00ZwwDIZdVeghw'
-
+const apiKey = 'AIzaSyDPJJChG0F7S36LTQrSy00ZwwDIZdVeghw';
+const auth = new AuthService()
 
 class ActivityUsers extends Component {
   constructor(props) {
@@ -55,8 +56,17 @@ class ActivityUsers extends Component {
     })
   }
 
+  setUser = () => {
+    let user_id = auth.getUserId()
+    getUser(user_id)
+    .then(json => {
+      this.setState({ currentUser: json })
+    })
+  }
+
   // determineUserMarker() sets this.state.currentUserCoordinates based on this.state.currentUser
   determineUserMarker = () => {
+    this.setUser()
     let { currentUser } = this.state
     const address = `${currentUser.address1} ${currentUser.city} ${currentUser.state} ${currentUser.zipcode}`
     const url = 'https://maps.googleapis.com/maps/api/geocode/json'
@@ -134,8 +144,8 @@ class ActivityUsers extends Component {
       <div className="App">
         <div className="Current">
           <h3>Current User</h3>
-          {!this.state.currentUser.name ? <div>Current User Not Found</div> :
-            <div>{this.state.currentUser.name}, {this.state.currentUser.email}<br/>
+          {!this.state.currentUser.email ? <div>Current User Not Found</div> :
+            <div>{this.state.currentUser.email}<br/>
               Address: {this.state.currentUser.address1} {this.state.currentUser.city}, {this.state.currentUser.state} {this.state.currentUser.zipcode}
             </div>
           }
@@ -150,7 +160,8 @@ class ActivityUsers extends Component {
             this.state.buddies.map((buddy, id) => {
               return (
                 <div>
-                  {id+1}. {buddy.name}, {buddy.email}<br/>
+                  {id+1}. {buddy.email}<br/>
+                  Address: {buddy.address1} {buddy.city}, {buddy.state} {buddy.zipcode}<br/>
                   Distance: {buddy.distance} miles
                 </div>
               )
@@ -177,46 +188,13 @@ class ActivityUsers extends Component {
 
   componentDidMount() {
     const activity_id = this.props.match.params.id
-    if (activity_id === "1") {
+    getActivityUsers(activity_id)
+    .then(json => {
+      console.log(json)
       this.setState({
-        currentUser: {id: 1, name:'Mac', email: 'tester123@example.com', address1: '4193 University Ave', city: 'San Diego', state: 'California', zipcode: '92105'},
-        buddies: [{ id: 1, name:'Mac', email: 'tester123@example.com', address1: '4193 University Ave', city: 'San Diego', state: 'California', zipcode: '92105'}, { id: 2, name:'Dennis', email: 'tester123@example.com', address1: '3288 Adams Ave', city: 'San Diego', state: 'California', zipcode: '92116'}]
+        buddies: json
       })
-    } else if (activity_id === "2") {
-      this.setState({
-        currentUser: {id: 1, name:'Mac', email: 'tester123@example.com', address1: '4193 University Ave', city: 'San Diego', state: 'California', zipcode: '92105'},
-        buddies: [{ id: 5, name:'Frank', email: 'tester123@example.com', address1: '3911 Cleveland Ave', city: 'San Diego', state: 'California', zipcode: '92103'}, { id: 6, name:'Gail', email: 'tester123@example.com', address1: '6519 Bisby Lake Ave', city: 'San Diego', state: 'California', zipcode: '92119'}, { id: 2, name:'Dennis', email: 'tester123@example.com', address1: '3288 Adams Ave', city: 'San Diego', state: 'California', zipcode: '92116'}]
-      })
-    } else if (activity_id === "3") {
-      this.setState({
-        currentUser: {id: 1, name:'Mac', email: 'tester123@example.com', address1: '4193 University Ave', city: 'San Diego', state: 'California', zipcode: '92105'},
-        buddies: [{ id: 3, name:'Charlie', email: 'tester123@example.com', address1: '4740 Mission Gorge Pl', city: 'San Diego', state: 'California', zipcode: '92120'}, { id: 1, name:'Mac', email: 'tester123@example.com', address1: '4193 University Ave', city: 'San Diego', state: 'California', zipcode: '92105'}, { id: 2, name:'Dennis', email: 'tester123@example.com', address1: '3288 Adams Ave', city: 'San Diego', state: 'California', zipcode: '92116'}]
-      })
-    } else if (activity_id === "4") {
-      this.setState({
-        currentUser: {id: 1, name:'Mac', email: 'tester123@example.com', address1: '4193 University Ave', city: 'San Diego', state: 'California', zipcode: '92105'},
-        buddies: [{ id: 4, name:'Dee', email: 'tester123@example.com', address1: '815 E St', city: 'San Diego', state: 'California', zipcode: '92101'}, { id: 1, name:'Mac', email: 'tester123@example.com', address1: '4193 University Ave', city: 'San Diego', state: 'California', zipcode: '92105'}]
-      })
-    } else if (activity_id === "5") {
-      this.setState({
-        currentUser: {id: 1, name:'Mac', email: 'tester123@example.com', address1: '4193 University Ave', city: 'San Diego', state: 'California', zipcode: '92105'},
-        buddies: [{ id: 5, name:'Frank', email: 'tester123@example.com', address1: '3911 Cleveland Ave', city: 'San Diego', state: 'California', zipcode: '92103'}, { id: 1, name:'Mac', email: 'tester123@example.com', address1: '4193 University Ave', city: 'San Diego', state: 'California', zipcode: '92105'}, { id: 6, name:'Gail', email: 'tester123@example.com', address1: '6519 Bisby Lake Ave', city: 'San Diego', state: 'California', zipcode: '92119'}]
-      })
-    } else {
-      this.setState({
-        currentUser: {id: 1, name:'Mac', email: 'tester123@example.com', address1: '4193 University Ave', city: 'San Diego', state: 'California', zipcode: '92105'},
-        buddies: [{ id: 6, name:'Gail', email: 'tester123@example.com', address1: '6519 Bisby Lake Ave', city: 'San Diego', state: 'California', zipcode: '92119'}]
-      })
-    }
-
-    // it might be better to use componentDidMount() for loading the current user instead of the buddy list. if so, the buddy list can be loaded in the ternary statement of displaying the buddies on the map
-
-    // getActivityUsers(activity_id)
-    // .then(json => {
-    //   this.setState({
-    //     users: json
-    //   })
-    // })
+    })
   }
 }
 
