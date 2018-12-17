@@ -1,6 +1,7 @@
+// re-arranged Router to not use authorization while working without backend
+
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-import { LinkContainer } from 'react-router-bootstrap';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { getUserData } from './services/clientToBackend';
 import { editUser } from './services/clientToBackend';
 import './App.css';
@@ -88,66 +89,109 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-            <Router >
-              <div>
-                <Header />
-
-                {(this.auth.loggedIn() && this.state.user.moderator)
-
-
-                ?  <Switch>
-                    <Route exact path="/activities/:id/users" component={ActivityUsers} />
-                    <Route exact path="/activities/:id/update" component={UpdateActivity} />
-                    <Route exact path="/activities/new" component={CreateActivity} />
-                    <Route exact path="/activities/:id" component={ShowActivity} />
-                    <Route exact path="/activities" component={List} />
-                    <Route exact path="/users/:id" component={ShowUser} />
-                    //EditProfile is a placeholder route, replace with users/:id/update
-                    <Route
-                      exact path="/activities/new"
-                      render={(props) => <CreateActivity />}
-                    />
-                    <Route
-                      exact path="/activities/:id"
-                      render={(props) => <ShowActivity
-                      modStatus={this.state.user.moderator} />}
-                    />
-                    <Route
-                      exact path="/activities" 
-                      render={(props) => <List
-                      modStatus={this.state.user.moderator} />}
-                    />
-                    <Route
-                      exact path="/myprofile/update"
-                      render={(props) => <EditProfile
-                      userObject={this.state.user}
-                      onUpdate={this.updateProfile} />}
-                    />
-                    <Route exact path="/myprofile" component={MyProfile} />
-                    <Route exact path="/register" component={Register} />
-                    <Route
-                      exact path="/login"
-                      render={(props) => <Login
-                      onLogin={this.login}
-                      onLoginSuccess={this.state.loginSuccess} />}
-                    />
-                    <Route exact path="/about" component={About} />
-                    <Route exact path="/" component={Home} />
-                  </Switch>
+        <Router >
+          <div>
+            <Header />
+            <Switch>
+              <Route exact path="/activities/:id/users" component={ActivityUsers} />
+              <Route exact path="/activities/:id/update" component={UpdateActivity} />
+              <Route exact path="/activities/new" component={CreateActivity} />
+              <Route exact path="/activities/:id" component={ShowActivity} />
+              <Route exact path="/activities" component={List} />
+              <Route exact path="/users/:id" component={ShowUser} />
+              {/*//EditProfile is a placeholder route, replace with users/:id/update*/}
+              <Route
+                exact path="/activities/new"
+                render={(props) => <CreateActivity />}
+              />
+              <Route
+                exact path="/activities/:id"
+                render={(props) => <ShowActivity
+                modStatus={this.state.user.moderator} />}
+              />
+              <Route
+                exact path="/activities"
+                render={(props) => <List
+                modStatus={this.state.user.moderator} />}
+              />
+              <Route
+                exact path="/myprofile/update"
+                render={(props) => <EditProfile
+                userObject={this.state.user}
+                onUpdate={this.updateProfile} />}
+              />
+              <Route exact path="/myprofile" component={MyProfile} />
+              <Route exact path="/register" component={Register} />
+              <Route
+                exact path="/login"
+                render={(props) => <Login
+                onLogin={this.login}
+                onLoginSuccess={this.state.loginSuccess} />}
+              />
+              <Route exact path="/about" component={About} />
+              <Route exact path="/" component={Home} />
+            </Switch>
 
 
-                :  <Switch>
-                      <Route exact path="/activities/:id" component={ShowActivity} />
-                      <Route exact path="/activities" component={List} />
-                      <Route exact path="/register" component={Register} />
-                      <Route exact path="/login"
-                        render={(props) => <Login
-                        onLogin={this.login}
-                        onLoginSuccess={this.state.loginSuccess} />}
-                      />
-                      <Route exact path="/about" component={About} />
-                      <Route exact path="/" component={Home} />
-                   </Switch>}
+
+
+    {/*         // {(this.auth.loggedIn() && this.state.user.moderator)
+                //
+                //
+                // ?  <Switch>
+                //     <Route exact path="/activities/:id/users" component={ActivityUsers} />
+                //     <Route exact path="/activities/:id/update" component={UpdateActivity} />
+                //     <Route exact path="/activities/new" component={CreateActivity} />
+                //     <Route exact path="/activities/:id" component={ShowActivity} />
+                //     <Route exact path="/activities" component={List} />
+                //     <Route exact path="/users/:id" component={ShowUser} />
+                //     //EditProfile is a placeholder route, replace with users/:id/update
+                //     <Route
+                //       exact path="/activities/new"
+                //       render={(props) => <CreateActivity />}
+                //     />
+                //     <Route
+                //       exact path="/activities/:id"
+                //       render={(props) => <ShowActivity
+                //       modStatus={this.state.user.moderator} />}
+                //     />
+                //     <Route
+                //       exact path="/activities"
+                //       render={(props) => <List
+                //       modStatus={this.state.user.moderator} />}
+                //     />
+                //     <Route
+                //       exact path="/myprofile/update"
+                //       render={(props) => <EditProfile
+                //       userObject={this.state.user}
+                //       onUpdate={this.updateProfile} />}
+                //     />
+                //     <Route exact path="/myprofile" component={MyProfile} />
+                //     <Route exact path="/register" component={Register} />
+                //     <Route
+                //       exact path="/login"
+                //       render={(props) => <Login
+                //       onLogin={this.login}
+                //       onLoginSuccess={this.state.loginSuccess} />}
+                //     />
+                //     <Route exact path="/about" component={About} />
+                //     <Route exact path="/" component={Home} />
+                //   </Switch>
+                //
+                //
+                // :  <Switch>
+                //       <Route exact path="/activities/:id" component={ShowActivity} />
+                //       <Route exact path="/activities" component={List} />
+                //       <Route exact path="/register" component={Register} />
+                //       <Route exact path="/login"
+                //         render={(props) => <Login
+                //         onLogin={this.login}
+                //         onLoginSuccess={this.state.loginSuccess} />}
+                //       />
+                //       <Route exact path="/about" component={About} />
+                //       <Route exact path="/" component={Home} />
+                //    </Switch>}
+    */}
               </div>
             </Router>
         <Footer />
