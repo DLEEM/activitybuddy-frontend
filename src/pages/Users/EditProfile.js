@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import AuthService from '../../services/AuthService'
-import { editUser } from '../../services/clientToBackend';
+//import { editUser } from '../../services/clientToBackend';
 import { Redirect } from 'react-router-dom'
 import { Form, FormGroup, Col, FormControl, Button, ControlLabel } from 'react-bootstrap'
 
@@ -16,7 +16,7 @@ class EditProfile extends Component {
       }
     }
   }
-  
+
   componentDidMount() {
     const userObject = this.props.userObject
     this.setState({
@@ -36,7 +36,7 @@ class EditProfile extends Component {
     e.preventDefault()
     this.props.onUpdate(this.state.form)
   }
-  
+
   render() {
     let { email, address1, city, state, zipcode } = this.state.form.user
       return (
