@@ -1,7 +1,5 @@
-// hard coded values in the componentDidMount()
-
 import React, { Component } from 'react';
-//import { getActivity, destroyActivity } from '../../services/clientToBackend';
+import { getActivity, destroyActivity } from '../../services/clientToBackend';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 
 class ShowActivities extends Component {
@@ -29,15 +27,15 @@ class ShowActivities extends Component {
     );
   }
 
-  // destroyActivity = (id) => {
-  //   destroyActivity(id)
-  //   .then(json => {
-  //     this.setState({
-  //       deleteSuccess: true
-  //     })
-  //     this.props.refresh()
-  //   })
-  // }
+  destroyActivity = (id) => {
+    destroyActivity(id)
+    .then(json => {
+      this.setState({
+        deleteSuccess: true
+      })
+      this.props.refresh()
+    })
+  }
 
   moderatorButtons = () => {
     if (this.props.modStatus) {
@@ -56,28 +54,15 @@ class ShowActivities extends Component {
 
   componentDidMount() {
     let index = this.props.match.params.id
-    if (index === 1) {
-      this.setState({ activity: { id: 1, name:'Hiking'} })
-    } else if (index === 2) {
-      this.setState({ activity: { id: 1, name:'Driving'} })
-    } else if (index === 3) {
-      this.setState({ activity: { id: 1, name:'Skiing'} })
-    } else if (index === 4) {
-      this.setState({ activity: { id: 1, name:'Cooking'} })
-    } else if (index === 5) {
-      this.setState({ activity: { id: 1, name:'Gardening'} })
-    } else {
-      this.setState({ activity: { id: 1, name:'Clubbing'} })
-    }
-    // getActivity(index)
-    // .then(activity => {
-    //   this.setState({
-    //     activity
-    //   })
-    // })
-    // .catch(err => {
-    //   console.log('ERROR::', err)
-    // })
+    getActivity(index)
+    .then(activity => {
+      this.setState({
+        activity
+      })
+    })
+    .catch(err => {
+      console.log('ERROR::', err)
+    })
   }
 }
 

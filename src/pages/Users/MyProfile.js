@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, ButtonToolbar } from 'react-bootstrap';
-import { getUserData } from '../../services/clientToBackend';
+//import { getUserData } from '../../services/clientToBackend';
 import AuthService from '../../services/AuthService';
 
 class YourProfile extends Component {
@@ -13,16 +13,16 @@ class YourProfile extends Component {
   }
 
   componentDidMount() {
-    let user_id = this.auth.getUserId()
-    getUserData(user_id)
-    .then(user => {
-      this.setState({
-        user: user
-      })
-    })
-    .catch(err => {
-      console.log('ERROR::', err)
-    })
+    // let user_id = this.auth.getUserId()
+    // getUserData(user_id)
+    // .then(user => {
+    //   this.setState({
+    //     user: user
+    //   })
+    // })
+    // .catch(err => {
+    //   console.log('ERROR::', err)
+    // })
   }
 
   render() {
