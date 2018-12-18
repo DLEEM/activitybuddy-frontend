@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getActivity, destroyActivity } from '../../services/clientToBackend';
+import { getActivity } from '../../services/clientToBackend';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 
 class ShowActivities extends Component {
@@ -10,6 +10,7 @@ class ShowActivities extends Component {
       deleteSuccess: false
     }
   }
+  //add image and description from database
   render() {
     return (
       <div className="App">
@@ -20,16 +21,6 @@ class ShowActivities extends Component {
 
       </div>
     );
-  }
-
-  destroyActivity = (id) => {
-    destroyActivity(id)
-    .then(json => {
-      this.setState({
-        deleteSuccess: true
-      })
-      this.props.refresh()
-    })
   }
 
   componentDidMount() {
