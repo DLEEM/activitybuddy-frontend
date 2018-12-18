@@ -10,7 +10,7 @@ class ShowActivities extends Component {
       deleteSuccess: false
     }
   }
-  
+  //add image and description from database
   render() {
     return (
       <div className="App">
