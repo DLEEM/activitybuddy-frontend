@@ -13,16 +13,11 @@ class ShowActivities extends Component {
   render() {
     return (
       <div className="App">
-      Activity
 
         {this.state.activity === {}
         ? <div>No Activity Selected</div>
         : <div>{this.state.activity.name}</div>}
 
-        <ButtonToolbar>
-          {this.moderatorButtons()}
-          <Button variant="link" href={`/activities/${this.state.activity.id}/users`}>See Buddies</Button>
-        </ButtonToolbar>
       </div>
     );
   }
@@ -35,21 +30,6 @@ class ShowActivities extends Component {
       })
       this.props.refresh()
     })
-  }
-
-  moderatorButtons = () => {
-    if (this.props.modStatus) {
-      return (
-        <div>
-          <Button variant="link" href="/myprofile/update">Edit</Button>
-          <Button variant="link" href="/myprofile/update">Delete</Button>
-        </div>
-      )
-    }
-  }
-
-  userButtons = () => {
-
   }
 
   componentDidMount() {

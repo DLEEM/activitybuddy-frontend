@@ -24,7 +24,6 @@ class ActivityIndex extends Component {
                   <Card>
                     <CardBody>
                       <CardTitle>{activity.name}</CardTitle>
-                      <CardText>BOTTOM TEXT</CardText>
                       <Button href={`/activities/${activity.id}`}>More Details</Button>
                     </CardBody>
                   </Card>
