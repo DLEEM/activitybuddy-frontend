@@ -53,7 +53,7 @@ class ShowActivities extends Component {
   }
 
   componentDidMount() {
-    let index = this.props.match.params.id
+    let index = this.props.activityId
     getActivity(index)
     .then(activity => {
       this.setState({

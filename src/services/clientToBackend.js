@@ -1,5 +1,5 @@
 import AuthService from './AuthService'
-const BASE = process.env.REACT_APP_API_URL
+const BASE = 'http://localhost:3001/'
 
 //Activities Requests
 let getActivities = function() {
