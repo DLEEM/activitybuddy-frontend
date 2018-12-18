@@ -2,7 +2,7 @@ import decode from 'jwt-decode'
 
 export default class AuthService {
 	constructor(domain) {
-		this.domain = 'http://localhost:3001'
+		this.domain = 'http://localhost:3001/'
 	}
 
 	login = (user) => {
