@@ -4,6 +4,7 @@ import { getUserData } from './services/clientToBackend';
 import { editUser } from './services/clientToBackend';
 import './App.css';
 
+
 import Home from './pages/Home';
 import About from './pages/About';
 import List from './pages/Activities/List';
