@@ -7,7 +7,7 @@ class ShowContainer extends Component {
     {console.log(this.props)}
     return (
       <div>
-        SUP {this.props.user.email}
+        {this.props.user.email}
         <ShowActivity activityId={this.props.match.params.id} />
         <ActivityUsers activityId={this.props.match.params.id}/>
       </div>
