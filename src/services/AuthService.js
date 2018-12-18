@@ -6,7 +6,6 @@ export default class AuthService {
 	}
 
 	login = (user) => {
-		console.log(user)
 		return this.authFetch(`${this.domain}/users/sign_in`, {
 			method: "POST",
 			body: JSON.stringify(user),
@@ -104,6 +103,7 @@ export default class AuthService {
 		if(response.status >= 200 && response.status < 300) {
 		} else {
 			console.log(":::ERROR:::", response)
+			
 		}
 		// we just return the whole response either way...
 		return response
