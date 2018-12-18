@@ -1,5 +1,7 @@
 import AuthService from './AuthService'
+
 const BASE = 'http://localhost:3001/'
+
 
 //Activities Requests
 let getActivities = function() {
