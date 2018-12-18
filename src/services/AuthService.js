@@ -2,7 +2,7 @@ import decode from 'jwt-decode'
 
 export default class AuthService {
 	constructor(domain) {
-		this.domain = 'http://localhost:3001'
+		this.domain = process.env.REACT_APP_API_URL
 	}
 
 	login = (user) => {
@@ -103,7 +103,7 @@ export default class AuthService {
 		if(response.status >= 200 && response.status < 300) {
 		} else {
 			console.log(":::ERROR:::", response)
-			
+
 		}
 		// we just return the whole response either way...
 		return response
