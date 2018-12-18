@@ -69,6 +69,7 @@ class Register extends Component {
                   <FormControl onChange={this.onChange} name="password" type="password" placeholder="password" required/>
                 </Col>
               </FormGroup>
+              {this.state.errors.password && <div>Error: Password  {this.state.errors.password[0]}</div>}
 
               <FormGroup>
                 <Col componentClass={ControlLabel}>
@@ -78,6 +79,7 @@ class Register extends Component {
                   <FormControl onChange={this.onChange} name="password_confirmation" type="password" placeholder="password" required/>
                 </Col>
               </FormGroup>
+
 
               <FormGroup>
                 <Col componentClass={ControlLabel}>
@@ -115,7 +117,7 @@ class Register extends Component {
                 </Col>
               </FormGroup>
 
-    					{this.state.errors.password && <div>Error: Password  {this.state.errors.password[0]}</div>}
+
     					<Button type="submit">Register</Button>
     				</Form>
     				{this.state.registerSuccess && <Redirect to="/activities" />}

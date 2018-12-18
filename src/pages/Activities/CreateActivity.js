@@ -10,13 +10,15 @@ class CreateActivity extends Component {
       successActivity: false,
       activity: {
         name: ""
-      }
+      },
+      title: "title"
     }
   }
 
   render() {
     return (
-      <div>
+      <div className="ActivityNew">
+        { this.state.title ? <h2 class="title">{this.state.title}</h2> : '' }
         <Form horizontal onSubmit={this.onSubmit}>
           <FormGroup controlId="formHorizontalName">
             <Col componentClass={ControlLabel}>

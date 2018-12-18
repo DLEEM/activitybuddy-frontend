@@ -25,6 +25,7 @@ class Login extends Component {
                     <FormControl onChange={this.onChange} name="email" type="email" value={email} placeholder="email" required/>
                   </Col>
                 </FormGroup>
+                {this.props.errors.email && <div>Error: Email {this.props.errors.email[0]}</div>}
 
                 <FormGroup>
                   <Col componentClass={ControlLabel}>
@@ -34,13 +35,13 @@ class Login extends Component {
                     <FormControl onChange={this.onChange} name="password" type="password" value={password} placeholder="password" required/>
                   </Col>
                 </FormGroup>
+                {this.props.errors.password && <div>Error: Password  {this.props.errors.password[0]}</div>}
 
                 <Button type="submit">Login</Button>
               </Form>
-              {console.log(this.props)}
               {this.props.onLoginSuccess && <Redirect to="/" />}
             </div>
-            <p>If you don't have an account, click <a href='/register'>here</a>.</p>
+            <p>If you dont have an account, click <a href='/register'>here</a>.</p>
           </div>
       )
   }

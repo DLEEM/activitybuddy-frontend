@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders the create activity correctly 1`] = `
+<div
+  className="ActivityNew"
+>
+  <h2
+    class="title"
+  >
+    title
+  </h2>
+  <form
+    className="form-horizontal"
+    onSubmit={[Function]}
+  >
+    <div
+      className="form-group"
+    >
+      <label
+        className="control-label"
+        htmlFor="formHorizontalName"
+      >
+        Name of Activity
+      </label>
+      <div
+        className=""
+      >
+        <input
+          className="form-control"
+          id="formHorizontalName"
+          name="name"
+          onChange={[Function]}
+          placeholder="Name of Activity"
+          type="text"
+          value=""
+        />
+      </div>
+    </div>
+    <div
+      className="form-group"
+    >
+      <div
+        className=""
+      >
+        <button
+          className="btn btn-default"
+          disabled={false}
+          type="submit"
+        >
+          Create Activity
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+`;

@@ -27,6 +27,7 @@ class App extends Component {
     super(props)
     this.auth = new AuthService()
     this.state = {
+      errors: "",
       loginSuccess: false,
       user: {}
     }
@@ -94,7 +95,7 @@ class App extends Component {
                       <Route exact path="/activities/:id" component={ShowActivity} />
                       <Route exact path="/activities" component={List} />
                       <Route exact path="/register" component={Register} />
-                      <Route exact path="/login" render={(props) => <Login onLogin={this.login} onLoginSuccess={this.state.loginSuccess} />} />
+                      <Route exact path="/login" render={(props) => <Login onLogin={this.login} errors={this.state.errors} onLoginSuccess={this.state.loginSuccess} />} />
                       <Route exact path="/about" component={About} />
                       <Route exact path="/" component={Home} />
                     </Switch>}
