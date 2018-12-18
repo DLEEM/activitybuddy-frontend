@@ -2,7 +2,8 @@ import decode from 'jwt-decode'
 
 export default class AuthService {
 	constructor(domain) {
-		this.domain = 'http://localhost:3001/'
+		this.domain = process.env.REACT_APP_API_URL
+		console.log(process.env.REACT_APP_API_URL);
 	}
 
 	login = (user) => {
