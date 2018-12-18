@@ -2,19 +2,38 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import { Form, FormGroup, Col, FormControl, Button, ControlLabel } from 'react-bootstrap'
 
+import AuthService from '../../services/AuthService'
+
 class Login extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
-    this.state = {
-      form: {
-        user: {}
-      }
-    }
+		this.state = {
+			form: {
+				user: {
+					email: "",
+					password: "",
+				}
+			}
+		}
   }
+
+  onChange = (e) => {
+    let { form } = this.state
+		form.user[e.target.name] = e.target.value
+		this.setState({ form })
+  }
+
+  onSubmit = (e) => {
+    e.preventDefault()
+		this.props.login(this.state.form)
+  }
+
   render() {
-    let { email, password } = this.state.form
+    let { email, password } = this.state.form.user
       return (
           <div>
+            <strong style={{color: "red"}}>{this.props.errorMessage}</strong>
+
             <div className="loginMain" >
               <Form onSubmit={this.onSubmit}>
                 <FormGroup>
@@ -37,20 +56,13 @@ class Login extends Component {
 
                 <Button type="submit">Login</Button>
               </Form>
-              {this.props.onLoginSuccess && <Redirect to="/" />}
+              {this.props.loginSuccess && <Redirect to="/" />}
             </div>
-            <p>If you don't have an account, click <a href='/register'>here</a>.</p>
+
+            <p>If you do not have an account, click <a href='/register'>here</a>.</p>
           </div>
       )
   }
-  onChange = (e) => {
-    let { form } = this.state
-    form.user[e.target.name] = e.target.value
-    this.setState({ form })
-  }
-  onSubmit = (e) => {
-    e.preventDefault()
-    this.props.onLogin(this.state.form)
-  }
+
 }
 export default Login

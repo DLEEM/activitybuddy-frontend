@@ -41,7 +41,7 @@ class Header extends Component {
           </LinkContainer>
 
           <LinkContainer to="/about">
-            <NavItem eventKey={4} onClick={this.auth.logout}>
+            <NavItem eventKey={4} onClick={this.props.logout}>
               Log-Out
             </NavItem>
           </LinkContainer>

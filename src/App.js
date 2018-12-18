@@ -30,18 +30,19 @@ class App extends Component {
     this.auth = new AuthService()
     this.state = {
       loginSuccess: false,
-      user: {}
+      errors: "",
+      user: {},
+      errorMessage: ""
     }
   }
 
-  register = (user) => {
-
-  }
 
   login = (user) => {
     this.auth.login(user)
     .then(json => {
+      console.log("got to second then:", json)
       if (json.errors) {
+        console.log("errors", json.errors);
         this.setState({
           errors: json.errors
         })
@@ -53,7 +54,9 @@ class App extends Component {
       }
     })
     .catch(err => {
+      let {errorMessage} = this.state
       console.log(err);
+      this.setState({errorMessage: "Invalid email and/or password"})
     })
   }
 
@@ -84,12 +87,20 @@ class App extends Component {
     }
   }
 
+  logout = () => {
+    this.auth.logout()
+    this.setState({
+      loginSuccess: false
+    })
+  }
+
   render() {
     return (
       <div className="App">
         <Router >
           <div>
-            <Header />
+            <Header logout={this.logout}/>
+
              {(this.auth.loggedIn() && this.state.user.moderator)
                 ?  <Switch>
                     <Route exact path="/activities/:id/users" component={ActivityUsers} />
@@ -124,8 +135,8 @@ class App extends Component {
                     <Route
                       exact path="/login"
                       render={(props) => <Login
-                      onLogin={this.login}
-                      onLoginSuccess={this.state.loginSuccess} />}
+                      login={this.login}
+                      loginSuccess={this.state.loginSuccess} errorMessage={this.state.errorMessage}/>}
                     />
                     <Route exact path="/about" component={About} />
                     <Route exact path="/" component={Home} />
@@ -138,8 +149,9 @@ class App extends Component {
                       <Route exact path="/register" component={Register} />
                       <Route exact path="/login"
                         render={(props) => <Login
-                        onLogin={this.login}
-                        onLoginSuccess={this.state.loginSuccess} />}
+                        login={this.login}
+                        loginSuccess={this.state.loginSuccess}
+                        errorMessage={this.state.errorMessage} />}
                       />
                       <Route exact path="/about" component={About} />
                       <Route exact path="/" component={Home} />
