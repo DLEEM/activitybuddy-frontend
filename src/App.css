@@ -40,10 +40,16 @@
   width: 85vw;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .individual-card {
   border: 1px solid black;
   width: 200px;
   margin: 5px 10px;
+}
+
+.map {
+  display: flex;
+  flex-wrap: wrap;
 }

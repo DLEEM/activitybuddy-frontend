@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Card, CardText, CardBody, CardTitle, Button, ButtonToolbar } from 'reactstrap';
 import { getUser, getActivityUsers } from '../../services/clientToBackend';
 import AuthService from '../../services/AuthService';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
@@ -144,38 +145,14 @@ class ActivityUsers extends Component {
   render() {
 
     return (
-      <div className="App">
-        <div className="Current">
-          <h3>Current User</h3>
-          {!this.state.currentUser.email ? <div>Current User Not Found</div> :
-            <div>{this.state.currentUser.email}<br/>
-              Address: {this.state.currentUser.address1} {this.state.currentUser.city}, {this.state.currentUser.state} {this.state.currentUser.zipcode}
-            </div>
-          }
-        </div>
+      <div>
 
-        <div className="List">
-          <h3>Activity Buddies</h3>
-          <form>
-            <input type="submit" value="Sort Buddies" onClick={this.sortBuddiesByDistances} />
-          </form>
-          {this.state.buddies.length === 0 ? <div>No Users Found</div> :
-            this.state.buddies.map((buddy, id) => {
-              return (
-                <div>
-                  {id+1}. {buddy.email}<br/>
-                  Address: {buddy.address1} {buddy.city}, {buddy.state} {buddy.zipcode}<br/>
-                  Distance: {buddy.distance} miles
-                </div>
-              )
-            })
-          }
-        </div>
 
-        <div className="map">
+        <div style={{ maxHeight: '300px', maxWidth: '900px', height: '75vh', width: '100%', margin: '0 auto', position: 'relative'}} >
           <Map
           google={this.props.google}
-          style={{ maxHeight: '500px', maxWidth: '500px', height: '75vh', width: '70%', margin: '0 auto' }}
+          style={{ maxHeight: '300px', maxWidth: '900px', height: '75vh', width: '100%', margin: '0 auto', position: 'relative',}}
+          className={'map'}
           initialCenter={this.state.center}
           zoom={11}
           >
@@ -185,6 +162,40 @@ class ActivityUsers extends Component {
             {this.state.distances.length === 0 ? this.getDistances() : ''}
           </Map>
         </div>
+
+
+        <div className="List">
+          <h3>Activity Buddies</h3>
+          <form>
+            <input type="submit" value="Sort Buddies" onClick={this.sortBuddiesByDistances} />
+          </form>
+          {this.state.buddies.length === 0 ? <div>No Users Found</div> :
+            <div className="card-container">
+              {this.state.buddies.map((buddy, id) => {
+                return (
+                  <div className="individual-card" key={id}>
+                    <Card>
+                      <CardBody>
+                        <CardTitle>
+                          {id+1}. {buddy.email}
+                        </CardTitle>
+                        <CardText>
+                          Address: {buddy.address1} {buddy.city}, {buddy.state} {buddy.zipcode}<br/>
+                          Distance: {buddy.distance} miles
+                        </CardText>
+                      </CardBody>
+                    </Card>
+                  </div>
+                )
+              })}
+            </div>
+          }
+        </div>
+
+
+
+
+
       </div>
     )
   }
