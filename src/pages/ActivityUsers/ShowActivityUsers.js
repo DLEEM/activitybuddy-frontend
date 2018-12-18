@@ -117,13 +117,16 @@ class ActivityUsers extends Component {
       this.showDistances
     );
   }
+
   // callback function passed to getDistances()
   showDistances = (response, status) => {
     let { buddies } = this.state
+    console.log(response)
     if (status === 'OK') {
       const numOfResults = response.rows[0].elements.length
       for (let i = 0; i < numOfResults; i ++) {
         buddies[i].distance = Math.floor(response.rows[0].elements[i].distance.value / 1609.344)      // response comes in meters, convert to miles
+        console.log(Math.floor(response.rows[0].elements[i].distance.value / 1609.344))
       }
       this.setState({ buddies })
     }
