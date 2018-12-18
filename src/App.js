@@ -8,6 +8,7 @@ import './App.css';
 import Home from './pages/Home';
 import About from './pages/About';
 import List from './pages/Activities/List';
+import ShowContainer from './pages/ShowContainer/ShowContainer';
 import ShowActivity from './pages/Activities/ShowActivity';
 import CreateActivity from './pages/Activities/CreateActivity';
 import UpdateActivity from './pages/Activities/UpdateActivity';
@@ -102,12 +103,12 @@ class App extends Component {
           <div>
             <Header logout={this.logout}/>
 
-             {(this.auth.loggedIn() && this.state.user.moderator)
+             {this.auth.loggedIn()
                 ?  <Switch>
-                    <Route exact path="/activities/:id/users" component={ActivityUsers} />
+
                     <Route exact path="/activities/:id/update" component={UpdateActivity} />
-                    <Route exact path="/activities/new" component={CreateActivity} />
-                    <Route exact path="/activities/:id" component={ShowActivity} />
+                    <Route exact path="/activities/:id" render={(props) => <ShowContainer
+                    user={this.state.user} {...props} />} />
                     <Route exact path="/activities" component={List} />
                     <Route exact path="/users/:id" component={ShowUser} />
                     //EditProfile is a placeholder route, replace with users/:id/update
@@ -115,11 +116,7 @@ class App extends Component {
                       exact path="/activities/new"
                       render={(props) => <CreateActivity />}
                     />
-                    <Route
-                      exact path="/activities/:id"
-                      render={(props) => <ShowActivity
-                      modStatus={this.state.user.moderator} />}
-                    />
+
                     <Route
                       exact path="/activities"
                       render={(props) => <List

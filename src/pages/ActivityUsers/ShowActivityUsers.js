@@ -190,7 +190,8 @@ class ActivityUsers extends Component {
   }
 
   componentDidMount() {
-    const activity_id = this.props.match.params.id
+    console.log(this.props)
+    const activity_id = this.props.activityId
     getActivityUsers(activity_id)
     .then(json => {
       console.log(json)
