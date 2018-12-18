@@ -13,21 +13,22 @@ class Footer extends Component {
   }
   render() {
     return (
-      <div className="App">
-         {this.moderatorButtons()}
-      </div>
-    );
-  }
+      <ButtonToolbar>
 
-  moderatorButtons = () => {
-    if (this.props.modStatus) {
-      return (
-        <div>
-          <Button variant="link" href={`/activities/${activity.id}/update`}>Edit</Button>
-          <Button variant="link" href="/myprofile/update" onClick={destroyActivity()}>Delete</Button>
-        </div>
-      )
-    }
+        <Button
+        variant="link"
+        href={`/activities/${activity.id}/update`}>
+        Edit
+        </Button>
+
+        <Button
+        variant="link"
+        onClick={destroyActivity(activity.id)}>
+        Delete
+        </Button>
+
+      </ButtonToolbar>
+    );
   }
 
   destroyActivity = (id) => {
