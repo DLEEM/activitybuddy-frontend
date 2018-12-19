@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ShowActivity from '../Activities/ShowActivity';
 import ActivityUsers from '../ActivityUsers/ShowActivityUsers';
-import ModeratorController from '../ActivityUsers/ModeratorController';
+import ModeratorController from '../ActivityUsers/moderatorcontroller';
 
 class ShowContainer extends Component {
   render() {
