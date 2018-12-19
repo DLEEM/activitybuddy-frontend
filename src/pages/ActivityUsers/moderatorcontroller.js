@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { getActivity, editActivity, destroyActivity } from '../../services/clientToBackend';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 
-class Footer extends Component {
+class ModeratorController extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -55,4 +55,4 @@ class Footer extends Component {
   }
 }
 
-export default Footer;
+export default ModeratorController;
