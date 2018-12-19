@@ -40,7 +40,7 @@ class Header extends Component {
             </NavItem>
           </LinkContainer>
 
-          <LinkContainer to="/about">
+          <LinkContainer to="/">
             <NavItem eventKey={4} onClick={this.props.logout}>
               Log-Out
             </NavItem>
@@ -63,25 +63,25 @@ class Header extends Component {
           </LinkContainer>
 
           </Navbar.Brand>
+          <Navbar.Toggle />
         </Navbar.Header>
+        <Navbar.Collapse>
+          <Nav>
+            <LinkContainer to="/about">
+              <NavItem eventKey={1}>
+                About
+              </NavItem>
+            </LinkContainer>
 
-        <Nav>
-          <LinkContainer to="/about">
-            <NavItem eventKey={1}>
-              About
-            </NavItem>
-          </LinkContainer>
+            <LinkContainer to="/activities">
+              <NavItem eventKey={2}>
+                Activities
+              </NavItem>
+            </LinkContainer>
+            {this.loginLogoutButton()}
 
-          <LinkContainer to="/activities">
-            <NavItem eventKey={2}>
-              Activities
-            </NavItem>
-          </LinkContainer>
-
-        </Nav>
-
-        {this.loginLogoutButton()}
-
+          </Nav>
+        </Navbar.Collapse>
       </Navbar>
     );
   }
