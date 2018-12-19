@@ -17,7 +17,10 @@ class ShowActivities extends Component {
 
         {this.state.activity === {}
         ? <div>No Activity Selected</div>
-        : <div>{this.state.activity.name}</div>}
+        : <div>
+            {this.state.activity.name}<br />
+            {this.state.activity.description}
+          </div>}
 
       </div>
     );
