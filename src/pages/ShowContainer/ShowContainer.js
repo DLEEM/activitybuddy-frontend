@@ -8,7 +8,6 @@ class ShowContainer extends Component {
     {console.log(this.props)}
     return (
       <div>
-        {this.props.user.email}
         <ShowActivity activityId={this.props.match.params.id} />
         <ModeratorController activityId={this.props.match.params.id}/>
         <ActivityUsers activityId={this.props.match.params.id}/>
@@ -17,5 +16,5 @@ class ShowContainer extends Component {
   }
 }
 
- 
+
 export default ShowContainer;
