@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { editActivity, destroyActivity } from '../../services/clientToBackend';
+import { getActivity, editActivity, destroyActivity } from '../../services/clientToBackend';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 
 class Footer extends Component {
@@ -17,13 +17,13 @@ class Footer extends Component {
 
         <Button
         variant="link"
-        href={`/activities/${activity.id}/update`}>
+        href={`/activities/${this.state.activity.id}/update`}>
         Edit
         </Button>
 
         <Button
         variant="link"
-        onClick={destroyActivity(activity.id)}>
+        onClick={destroyActivity(this.state.activity.id)}>
         Delete
         </Button>
 
@@ -38,6 +38,19 @@ class Footer extends Component {
         deleteSuccess: true
       })
       this.props.refresh()
+    })
+  }
+
+  componentDidMount() {
+    let index = this.props.activityId
+    getActivity(index)
+    .then(activity => {
+      this.setState({
+        activity
+      })
+    })
+    .catch(err => {
+      console.log('ERROR::', err)
     })
   }
 }
