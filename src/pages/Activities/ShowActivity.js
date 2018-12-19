@@ -14,13 +14,14 @@ class ShowActivities extends Component {
   render() {
     return (
       <div className="App">
+
         {this.state.activity === {}
         ? <div>No Activity Selected</div>
-        : <div>{this.state.activity.name}</div>}
+        : <div>
+            {this.state.activity.name}<br />
+            {this.state.activity.description}
+          </div>}
 
-        <ButtonToolbar>
-          <Button variant="link" href={`/activities/${this.state.activity.id}/users`}>See Buddies</Button>
-        </ButtonToolbar>
       </div>
     );
   }

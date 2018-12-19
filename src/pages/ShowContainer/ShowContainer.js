@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ShowActivity from '../Activities/ShowActivity';
 import ActivityUsers from '../ActivityUsers/ShowActivityUsers';
+import ModeratorController from '../ActivityUsers/ModeratorController';
 
 class ShowContainer extends Component {
   render() {
@@ -9,6 +10,7 @@ class ShowContainer extends Component {
       <div>
         {this.props.user.email}
         <ShowActivity activityId={this.props.match.params.id} />
+        <ModeratorController activityId={this.props.match.params.id}/>
         <ActivityUsers activityId={this.props.match.params.id}/>
       </div>
     )
